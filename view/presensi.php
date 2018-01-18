@@ -1,0 +1,200 @@
+<?php
+ require_once "../template/header.php";
+ $error = ""; //Menampilkan pesan error atau berhasil
+ $error1= "";
+ $kelas = ""; //menangkap nilai dari menu kelas
+ $jurusan = ""; //menangkap nilai dari menu jurusan
+ $semester = ""; //menangkap nilai dari menu semester
+
+ require_once "../functions/Library.php";
+ $siswa = new Library();
+ $absen = $siswa->presensi();
+
+ if(isset($_POST["cari"])){
+   $kelas = $_POST["kelas"];
+   $jurusan = $_POST["jurusan"];
+   $semester = $_POST["semester"];
+
+   //cek apakah user memilih menu atau tidak
+   // if(!empty($kelas) && !empty($jurusan) && !empty($semester)){
+     // $semester = $_POST["keyword"];
+     $absen = $siswa->cari($kelas,$jurusan);
+   // }else{
+   //   $error1 = "Anda Harus Memilih Menu Presensi!";
+   // }
+}
+
+   //proses jika presensi telah selesai
+   if(isset($_POST['absen'])){
+     //cek apakah keterangan presensi selesai di input
+     if(!empty($keterangan)){
+       $keterangan  = $_POST['keterangan'];
+       $ket  = $siswa->keterangan($keterangan);
+         if($ket == "Success"){
+           $error = "Presensi Berhasil !";
+         }else{
+           echo "Gagal";
+         }
+     }else{
+       $error1 = "Anda Harus Mengisi Keterangan Presensi!";
+     }
+
+   }
+
+
+
+
+ ?>
+
+<!-- Page Heading -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Presensi Siswa</h1>
+        <ol class="breadcrumb">
+            <li><a href="index.html">Dashboard</a></li>
+            <li class="active"></i>Presensi</li>
+        </ol>
+    </div>
+</div>
+<!-- Page Heading -->
+
+<!-- Form Presensi -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+              <form class="form" action="" method="post">
+                <div class="btn-group"> <!-- categori kelas -->
+                  <select class="selectpicker" data-width="fit" name="kelas" title="Kelas">
+                    <option value="X">X</option>
+                    <option value="XI">XI</option>
+                    <option value="XII">XII</option>
+                  </select>
+                </div> <!-- ./categori kelas -->
+                <div class="btn-group"> <!-- categori jurusan -->
+                  <select class="selectpicker" data-width="fit" name="jurusan" title="jurusan">
+                    <option value="TKJ 1">TKJ 1</option>
+                    <option value="TKJ 2">TKJ 2</option>
+                    <option value="TKR 1">TKR 1</option>
+                    <option value="TKR 2">TKR 2</option>
+                    <option value="TAV">TAV</option>
+                    <option value="NKPI">NKPI</option>
+                    <option value="AP 1">AP 1</option>
+                    <option value="AP 2">AP 2</option>
+                    <option value="Akutansi">Akutansi</option>
+                    <option value="Tata Niaga">Tata Niaga</option>
+                    <option value="Tata Busana">Tata Busana</option>
+                  </select>
+                </div> <!-- ./categori jurusan -->
+                <div class="btn-group"> <!-- categori jurusan -->
+                  <select class="selectpicker" data-width="fit" name="semester" title="semester">
+                    <option value="semester 1">semester 1</option>
+                    <option value="semester 2">semester 2</option>
+                    <option value="semester 3">semester 3</option>
+                    <option value="semester 4">semester 4</option>
+                    <option value="semester 5">semester 5</option>
+                    <option value="semester 6">semester 6</option>
+                  </select>
+                </div> <!-- ./categori jurusan -->
+                <div class="btn-group">
+                  <button type="submit" class="btn btn-success btn-sm" name="cari">Ok</button>
+                </div>
+              </form>
+            </div>
+            <div class="panel-body">
+              <ul class="pil-categori">
+                <li><span>Kelas : </span><?php echo $kelas; ?></li>
+                <li><span>Jurusan : </span><?php echo $jurusan; ?></li>
+                <li><span>Semester : </span><?php echo $semester; ?></li>
+              </ul>
+              <?php if($error != ''){ ?>
+                <div class="alert alert-success">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <?php echo $error; ?>
+                </div>
+              <?php } ?>
+
+              <div class="table-responsive">
+                <form action='' method='post'>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>NIS</th>
+                      <th>NAMA</th>
+                      <th>KELAS</th>
+                      <th>JURUSAN</th>
+                      <th>KETERANGAN</th>
+                    </tr>
+                  </thead>
+                  <?php
+
+                    if(!empty($kelas) && !empty($jurusan) && !empty($semester) ){
+                      // echo "
+                      // <table class='table table-bordered' style='margin-top:-20px;color:salmon;'>
+                      //   <thead>
+                      //     <tr>
+                      //       <td class='text-center'>Silahkan Pilih Menu Presensi Terlebih Dahulu</td>
+                      //     <tr>
+                      //   </thead>
+                      // </table>
+                      // ";
+
+                      while($data = $absen->fetch(PDO::FETCH_OBJ)){
+                        echo "<tr>";
+
+                            echo"<td>$data->id_siswa</td>";
+                            echo"<td>$data->nis</td>";
+                            echo"<td>$data->nama</td>";
+                            echo"<td>$data->kelas</td>";
+                            echo"<td>$data->jurusan</td>";
+                            echo"
+                            <td>
+                                <input type='checkbox' name='keterangan[]' value='hadir'> hadir
+                                <input type='checkbox' name='keterangan[]' value='izin'> izin
+                                <input type='checkbox' name='keterangan[]' value='alpha'> alpha
+                            </td>
+                            ";
+                        echo "</tr>";
+
+                      }
+
+                    }else{
+                      echo "
+                      <table class='table table-bordered' style='margin-top:-20px;'>
+                        <thead>
+                          <tr>
+                            <td class='text-center'>Silahkan Pilih Menu Presensi Terlebih Dahulu</td>
+                          <tr>
+                        </thead>
+                      </table>
+                      ";
+                        if(isset($_POST["cari"])){
+                          $error1 = "Anda Harus Memilih Menu Sebelum Melakukan Presensi!";
+                        }
+                    }
+                   ?>
+                </table>
+                <?php if($error1 != ''){ ?>
+                  <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <?php echo $error1; ?>
+                  </div>
+                <?php } ?>
+                <button type="submit" name="absen" class="btn btn-success buton-presensi">Submit Presensi</button>
+                <div class="btn-group tanggal-presen">
+                  <ul class="nav navbar-nav navbar-right">
+                    <li><span class="calendar">Tanggal:</span> <input type="text" id="datepicker" placeholder="Isi Tanggal"></li>
+                  </ul>
+                </div>
+              </form><br>
+
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Form Presensi -->
+
+
+<?php require_once "../template/footer.php" ?>

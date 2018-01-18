@@ -1,0 +1,63 @@
+.navbar-inverse{
+  background-color: #3c8dbc !important;
+  border-color: #3c8dbc;
+}
+.navbar-inverse .navbar-brand{
+  color: #fff;
+}
+.top-nav>li>a {
+  color: #fff;
+}
+.page-wrapper{
+  min-height: 700px;
+}
+.side-nav{
+  background-color: #222d32;
+}
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+  border-color: #3c8dbc;
+  background-color: #3c8dbc;
+}
+.badge{
+  background-color: #c72f0d;
+}
+.buton-presensi{
+  border-radius: 0px;
+}
+.pil-categori{
+  margin-left: -38px;
+}
+.pil-categori li{
+  display: inherit;
+}
+.pil-categori li span{
+  font-weight: bold;
+  font-size: 15px;
+}
+.tanggal-presen{
+  margin-left: 5px;
+}
+
+#wrapper{
+  background-color: #222d32;
+}
+#datepicker{
+  color: #000;
+  text-indent: 8px;
+  border: 1px solid #dee4ed;
+  background-color: #fff;
+  border-radius: 2px;
+  height: 30px;
+}
+@media (max-width: 480px) {
+  .calendar{
+    display: none;
+  }
+}
+@media (max-width: 480px) {
+  #datepicker{
+    width: 139px;
+    height: 30px;
+    margin-left: 17px;
+  }
+}
