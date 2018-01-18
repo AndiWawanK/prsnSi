@@ -14,10 +14,10 @@
     }
 
     //keterangan absensi
-    public function keterangan($keterangan){
+    public function keterangan($keterangan,$tanggal){
       $jumlah = count($keterangan);
       for($x=0;$x<$jumlah;$x++){
-      $query = $this->db->query("INSERT INTO keterangan VALUES ('','$keterangan[$x]')");
+      $query = $this->db->query("INSERT INTO keterangan VALUES ('','$keterangan[$x]','$tanggal')");
       }
         if(!$query){
           return "Failed";
@@ -33,6 +33,7 @@
       $query = $this->db->query($sql);
       return $query;
     }
+
 
 
   }

@@ -27,18 +27,18 @@
    //proses jika presensi telah selesai
    if(isset($_POST['absen'])){
      //cek apakah keterangan presensi selesai di input
-     if(!empty($keterangan)){
        $keterangan  = $_POST['keterangan'];
-       $ket  = $siswa->keterangan($keterangan);
+       $tanggal     = $_POST['tanggal'];
+        if(!empty($keterangan) && !empty($tanggal)){
+         $ket  = $siswa->keterangan($keterangan,$tanggal);
          if($ket == "Success"){
            $error = "Presensi Berhasil !";
          }else{
            echo "Gagal";
          }
-     }else{
-       $error1 = "Anda Harus Mengisi Keterangan Presensi!";
-     }
-
+      }else{
+        $error1 = "Anda Harus Mengiris Keterangan Absensi!";
+      }
    }
 
 
@@ -130,15 +130,6 @@
                   <?php
 
                     if(!empty($kelas) && !empty($jurusan) && !empty($semester) ){
-                      // echo "
-                      // <table class='table table-bordered' style='margin-top:-20px;color:salmon;'>
-                      //   <thead>
-                      //     <tr>
-                      //       <td class='text-center'>Silahkan Pilih Menu Presensi Terlebih Dahulu</td>
-                      //     <tr>
-                      //   </thead>
-                      // </table>
-                      // ";
 
                       while($data = $absen->fetch(PDO::FETCH_OBJ)){
                         echo "<tr>";
@@ -184,7 +175,7 @@
                 <button type="submit" name="absen" class="btn btn-success buton-presensi">Submit Presensi</button>
                 <div class="btn-group tanggal-presen">
                   <ul class="nav navbar-nav navbar-right">
-                    <li><span class="calendar">Tanggal:</span> <input type="text" id="datepicker" placeholder="Isi Tanggal"></li>
+                    <li><span class="calendar">Tanggal:</span> <input type="text" id="datepicker" name="tanggal" placeholder="Isi Tanggal"></li>
                   </ul>
                 </div>
               </form><br>
