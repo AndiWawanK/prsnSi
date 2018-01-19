@@ -36,18 +36,11 @@
 
     //cari data yang akan di update berdasarkan nis
     public function cariNis($nis){
-      $sql   = "SELECT * FROM siswa WHERE nis = '$nis' ";
+      $sql   = "SELECT * FROM siswa WHERE nis like '%".$nis."%'";
       $query = $this->db->query($sql);
       return $query;
+
     }
 
-    //cek nis siswa
-    public function cekNis(){
-      $sql   = "SELECT * FROM siswa WHERE nis ";
-      $query = $this->db->query($sql);
-      return $query;
-    }
-
-  }
-
+}
  ?>

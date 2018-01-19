@@ -7,13 +7,8 @@ $siswa = $dataSiswa->presensi();
 
   if(isset($_POST["search"])){
     $nis = $_POST["keyword"];
-
-    if($nis == $data1->nis){
-      $siswa = $dataSiswa->cariNis($nis);
-    }else{
-      $error = "data tidak ada";
-    }
-}
+    $siswa = $dataSiswa->cariNis($nis);
+  }
 
 ?>
 
@@ -42,7 +37,7 @@ $siswa = $dataSiswa->presensi();
       <form class="navbar-form navbar-left" action="" method="post">
         <div class="form-group">
           <button type="submit" class="btn btn-warning buton-presensi" name="tambah"><span class="fa fa-plus"></span> Tambah</button>
-          <input type="text" class="form-control" name="keyword" placeholder="Search">
+          <input type="text" class="form-control" name="keyword" placeholder="Search nis">
         </div>
         <button type="submit" class="btn btn-success" name="search"><span class="fa fa-search"></span> Cari</button>
       </form>
@@ -60,8 +55,8 @@ $siswa = $dataSiswa->presensi();
         </thead>
         <tbody>
           <?php
-
           while($data = $siswa->fetch(PDO::FETCH_OBJ)){
+
             echo "
             <tr>
               <td>$data->nis</td>
@@ -74,7 +69,8 @@ $siswa = $dataSiswa->presensi();
               </td>
             </tr>
             ";
-          }
+
+        }
 
            ?>
         </tbody>
