@@ -1,4 +1,21 @@
-<?php require_once "../template/header.php" ?>
+<?php
+require_once "../template/header.php";
+require_once "../functions/Library.php";
+$error = "";
+$dataSiswa = new Library();
+$siswa = $dataSiswa->presensi();
+
+  if(isset($_POST["search"])){
+    $nis = $_POST["keyword"];
+
+    if($nis == $data1->nis){
+      $siswa = $dataSiswa->cariNis($nis);
+    }else{
+      $error = "data tidak ada";
+    }
+}
+
+?>
 
 
 <!-- Page Heading -->
@@ -14,57 +31,54 @@
 <!-- Page Heading -->
 
 <div class="container-fluid">
-  <div class="col-md-8">
-    <div class="panel panel-default">
-      <div class="panel-heading"><h1></h1></div>
-      <div class="panel-body">
-        <form class="form" action="" method="post">
-          <div class="form-group">
-            <input type="text" name="nama" class="form-control" placeholder="Nama Siswa">
-          </div>
-          <div class="form-group">
-            <input type="text" name="nis" class="form-control" placeholder="No Induk Siswa">
-          </div>
-          <div class="form-group">
-            <select class="form-control" name="kelas">
-              <option value="">Kelas</option>
-              <option value="X">X</option>
-              <option value="XI">XI</option>
-              <option value="XII">XII</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <select class="form-control" name="jurusan">
-              <option value="">Jurusan</option>
-              <option value="TKJ 1">TKJ 1</option>
-              <option value="TKJ 2">TKJ 2</option>
-              <option value="TKR 1">TKR 1</option>
-              <option value="TKR 2">TKR 2</option>
-              <option value="TAV">TAV</option>
-              <option value="NKPI">NKPI</option>
-              <option value="AP 1">AP 1</option>
-              <option value="AP 2">AP 2</option>
-              <option value="Akutansi">Akutansi</option>
-              <option value="Tata Niaga">Tata Niaga</option>
-              <option value="Tata Busana">Tata Busana</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <select class="form-control" name="semester">
-              <option value="">Semester</option>
-              <option value="semester 1">Semester 1</option>
-              <option value="semester 2">Semester 2</option>
-              <option value="semester 3">Semester 3</option>
-              <option value="semester 4">Semester 4</option>
-              <option value="semester 5">Semester 5</option>
-              <option value="semester 6">Semester 6</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <button type="submit" class="btn btn-success buton-presensi" name="tambah"><i class="fa fa-plus"></i> Tambah</button>
-          </div>
-        </form>
+  <div class="col-md-12">
+    <?php if($error != ''){ ?>
+      <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <?php echo $error; ?>
       </div>
+    <?php } ?>
+    <nav class="navbar navbar-inverse" style="border-radius:0px;">
+      <form class="navbar-form navbar-left" action="" method="post">
+        <div class="form-group">
+          <button type="submit" class="btn btn-warning buton-presensi" name="tambah"><span class="fa fa-plus"></span> Tambah</button>
+          <input type="text" class="form-control" name="keyword" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-success" name="search"><span class="fa fa-search"></span> Cari</button>
+      </form>
+    </nav>
+    <div class="table table-responsive" style="margin-top:-20px;">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>NIS</th>
+            <th>NAMA</th>
+            <th>KELAS</th>
+            <th>JURUSAN</th>
+            <th>ACTION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+
+          while($data = $siswa->fetch(PDO::FETCH_OBJ)){
+            echo "
+            <tr>
+              <td>$data->nis</td>
+              <td>$data->nama</td>
+              <td>$data->kelas</td>
+              <td>$data->jurusan</td>
+              <td>
+                <button class='btn btn-info btn-xs'><span class='fa fa-edit'</span> Edit</button>
+                <button class='btn btn-danger btn-xs'><span class='fa fa-trash'</span> Delete</button>
+              </td>
+            </tr>
+            ";
+          }
+
+           ?>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
