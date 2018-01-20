@@ -38,9 +38,15 @@
     public function cariNis($nis){
       $sql   = "SELECT * FROM siswa WHERE nis like '%".$nis."%'";
       $query = $this->db->query($sql);
-      return $query;
+      //cek nis
+      if($query->fetch() > 0){
+        return $query;
+      }else{
+        return "False";
+      }
 
     }
+
 
 }
  ?>

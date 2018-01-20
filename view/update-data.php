@@ -7,7 +7,14 @@ $siswa = $dataSiswa->presensi();
 
   if(isset($_POST["search"])){
     $nis = $_POST["keyword"];
+
     $siswa = $dataSiswa->cariNis($nis);
+
+    // if($siswa != "False"){
+    //   echo "true";
+    // }else{
+    //   echo "Data tidak ada";
+    // }
   }
 
 ?>
@@ -55,8 +62,8 @@ $siswa = $dataSiswa->presensi();
         </thead>
         <tbody>
           <?php
+        if($siswa != "False"){
           while($data = $siswa->fetch(PDO::FETCH_OBJ)){
-
             echo "
             <tr>
               <td>$data->nis</td>
@@ -69,9 +76,10 @@ $siswa = $dataSiswa->presensi();
               </td>
             </tr>
             ";
-
         }
-
+      }else{
+        echo "Data tidak ada";
+      }
            ?>
         </tbody>
       </table>
