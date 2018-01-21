@@ -10,11 +10,6 @@ $siswa = $dataSiswa->presensi();
 
     $siswa = $dataSiswa->cariNis($nis);
 
-    // if($siswa != "False"){
-    //   echo "true";
-    // }else{
-    //   echo "Data tidak ada";
-    // }
   }
 
 ?>
@@ -62,7 +57,9 @@ $siswa = $dataSiswa->presensi();
         </thead>
         <tbody>
           <?php
-        if($siswa != "False"){
+          print_r($siswa);
+          $cek  = "SELECT nis FROM siswa";
+          if($cek == $siswa){
           while($data = $siswa->fetch(PDO::FETCH_OBJ)){
             echo "
             <tr>
@@ -76,10 +73,10 @@ $siswa = $dataSiswa->presensi();
               </td>
             </tr>
             ";
+          }
+        }else{
+          echo "Data tidak ada";
         }
-      }else{
-        echo "Data tidak ada";
-      }
            ?>
         </tbody>
       </table>
