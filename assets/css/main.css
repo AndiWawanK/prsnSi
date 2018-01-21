@@ -8,6 +8,9 @@
 .top-nav>li>a {
   color: #fff;
 }
+.pagination-siswa{
+  margin: auto;
+}
 .page-wrapper{
   min-height: 700px;
 }

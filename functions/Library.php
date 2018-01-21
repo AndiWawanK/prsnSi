@@ -13,17 +13,18 @@
       return $query;
     }
 
+    public function dataSiswa($start,$perPage){
+      $sql   = "SELECT * FROM siswa LIMIT $start , $perPage";
+      $query = $this->db->query($sql);
+      return $query;
+    }
+
     //hitung jumlah data
     public function jumlahData(){
       $sql    = "SELECT * FROM siswa";
       $query  = $this->db->query($sql);
 
-      // $arr = array();
-      // while($row = $query->fetch(PDO::FETCH_OBJ) != null){
-      //   $arr[] += $row;
-      // }
-      // $jumlah = count($arr);
-      // return $jumlah;
+
       while($row = $query->fetch(PDO::FETCH_OBJ)){
         $siswa[] = $row;
       }
@@ -83,7 +84,8 @@
 
     //rekap data absensi
     public function rekapAbsensi(){
-      $sql   = "SELECT siswa.jurusan , siswa.kelas , keterangan.tanggal FROM siswa INNER JOIN keterangan ON siswa.id_siswa = keterangan.id_keterangan";
+      $sql   = "SELECT siswa.kelas , siswa.jurusan , keterangan.tanggal FROM siswa
+                INNER JOIN keterangan ON siswa.id_siswa = keterangan.id_siswa";
       $query = $this->db->query($sql);
       return $query;
     }

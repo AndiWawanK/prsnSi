@@ -1,15 +1,36 @@
 <?php
 require_once "../template/header.php";
 require_once "../functions/Library.php";
+
 $error = "";
 $dataSiswa = new Library();
-$siswa = $dataSiswa->presensi();
+$perPage = 9;
+
+$page = isset($_GET["page"]) ? (int)$_GET["page"] : 1;
+$start = ($page > 1) ? ($page * $perPage) - $perPage : 0;
+
+$siswa = $dataSiswa->dataSiswa($start,$perPage);
+
+$siswa1 = $dataSiswa->presensi();
+while($row = $siswa1->fetch(PDO::FETCH_OBJ)){
+  $datSis[] = $row;
+}
+$total = count($datSis);
+$pages = ceil($total / $perPage );
+
+
+
+
+
+
+
+
+
 
   if(isset($_POST["search"])){
     $nis = $_POST["keyword"];
     $nama = $_POST["keyword"];
     $siswa = $dataSiswa->cariNis($nis,$nama);
-
   }
 
 ?>
@@ -58,7 +79,6 @@ $siswa = $dataSiswa->presensi();
         </thead>
         <tbody>
           <?php
-
           while($data = $siswa->fetch(PDO::FETCH_OBJ)){
             echo "
             <tr>
@@ -73,10 +93,32 @@ $siswa = $dataSiswa->presensi();
             </tr>
             ";
           }
-
            ?>
         </tbody>
       </table>
+      <!-- pagination -->
+      <div class="pagination-siswa">
+        <ul class="pagination pagination-sm">
+          <?php if($page <= 1){ ?>
+            <li class="previous disabled"><a href="">&laquo;</a></li>
+          <?php } ?>
+
+          <?php if($page > 1){ ?>
+            <li><a href="?page=<?= $page - 1; ?>">&laquo;</a></li>
+          <?php } ?>
+            <?php for($i=1; $i<=$pages; $i++){ ?>
+              <li><a href="?page=<?= $i; ?>"><?= $i; ?></a></li>
+            <?php } ?>
+          <?php if($page < $pages){ ?>
+            <li><a href="?page=<?= $page + 1; ?>">&raquo;</a></li>
+          <?php } ?>
+
+          <?php if($page >= $pages){ ?>
+            <li class="previous disabled"><a href="">&raquo;</a></li>
+          <?php } ?>
+        </ul>
+      </div>
+      <!-- pagination -->
     </div>
   </div>
 </div>

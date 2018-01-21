@@ -50,8 +50,9 @@
               <ul class="nav navbar-nav side-nav">
                 <li><a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
                 <li><a href="presensi.php"><i class="fa fa-fw fa fa-hospital-o"></i> Prensesi</a></li>
-                <li><a href="data-absensi.php"><i class="fa fa-fw fa-table"></i> Data Absensi</a></li>
+                <li><a href="data-absensi.php"><i class="fa fa-fw fa-table"></i> Rekap Absensi</a></li>
                 <li><a href="update-data.php"><i class="fa fa-fw fa-edit"></i> Update Data Siswa</a></li>
+                <li><a href="e-tugas.php"><i class="fa fa-mortar-board"></i> E-Tugas</a></li>
               </ul>
           </div>
           <!-- Menu Sidebar -->
