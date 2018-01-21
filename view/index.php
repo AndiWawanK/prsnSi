@@ -1,5 +1,10 @@
-<?php require_once "../template/header.php" ?>
+<?php
+require_once "../template/header.php";
+require_once "../functions/Library.php";
+$jumlah = new Library();
+$data   = $jumlah->jumlahData();
 
+?>
 <!-- Page Heading -->
 <div class="row">
     <div class="col-lg-12">
@@ -11,6 +16,7 @@
 <!-- Page Heading -->
 
 <!-- Menu Chart -->
+
 <div class="row">
     <div class="col-lg-3 col-md-6">
         <div class="panel panel-primary">
@@ -20,7 +26,7 @@
                         <i class="fa fa-users fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">2300</div>
+                        <div class="huge"><?php echo $data; ?></div>
                         <div>Jumlah Siswa</div>
                     </div>
                 </div>
@@ -42,8 +48,8 @@
                         <i class="fa fa-tasks fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">2200</div>
-                        <div>Jumlah Siswa Aktif</div>
+                        <div class="huge">11</div>
+                        <div>Jumlah Jurusan</div>
                     </div>
                 </div>
             </div>
@@ -86,7 +92,7 @@
                         <i class="fa fa-slideshare fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">26</div>
+                        <div class="huge">3</div>
                         <div>Jumlah Kelas</div>
                     </div>
                 </div>

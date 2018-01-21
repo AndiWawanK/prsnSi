@@ -1,11 +1,17 @@
-<?php require_once "../template/header.php" ?>
+<?php
+require_once "../template/header.php";
+require_once "../functions/Library.php";
+$siswa = new Library();
+$data = $siswa->rekapAbsensi();
+
+?>
 
 <!-- Page Heading -->
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">Data Absensi</h1>
         <ol class="breadcrumb">
-            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="index.php">Dashboard</a></li>
             <li class="active">Data Absensi</li>
         </ol>
     </div>
@@ -59,7 +65,23 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <?php
+                  while($row = $data->fetch(PDO::FETCH_OBJ)){
+                    echo "
+                    <tr>
+                      <td>$row->kelas</td>
+                      <td>$row->jurusan</td>
+                      <td>$row->tanggal</td>
+                      <td>
+                        <a href='' class='btn btn-danger btn-xs'><i class='fa fa-cloud-download'></i> Download</a>
+                        <a href='' class='btn btn-info btn-xs'><i class='fa fa-eye'></i> View</a>
+                      </td>
+                    </tr>
+                    ";
+                  }
+                   ?>
+
+                  <!-- <tr>
                     <td>XII</td>
                     <td>Teknik Komputer Jaringan</td>
                     <td>01/14/2018</td>
@@ -67,25 +89,7 @@
                       <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-cloud-download"></i> Download</button>
                       <button type="button" class="btn btn-info btn-xs"><i class="fa fa-eye"></i> View</button>
                     </td>
-                  </tr>
-                  <tr>
-                    <td>XII</td>
-                    <td>Teknik Komputer Jaringan</td>
-                    <td>01/13/2018</td>
-                    <td>
-                      <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-cloud-download"></i> Download</button>
-                      <button type="button" class="btn btn-info btn-xs"><i class="fa fa-eye"></i> View</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>XII</td>
-                    <td>Teknik Komputer Jaringan</td>
-                    <td>01/12/2018</td>
-                    <td>
-                      <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-cloud-download"></i> Download</button>
-                      <button type="button" class="btn btn-info btn-xs"><i class="fa fa-eye"></i> View</button>
-                    </td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>
             </div>

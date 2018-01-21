@@ -22,15 +22,19 @@
    // }else{
    //   $error1 = "Anda Harus Memilih Menu Presensi!";
    // }
+
 }
 
    //proses jika presensi telah selesai
    if(isset($_POST['absen'])){
      //cek apakah keterangan presensi selesai di input
+
        $keterangan  = $_POST['keterangan'];
        $tanggal     = $_POST['tanggal'];
+       $id_siswa    = $_POST['id_siswa'];
+       
         if(!empty($keterangan) && !empty($tanggal)){
-         $ket  = $siswa->keterangan($keterangan,$tanggal);
+         $ket  = $siswa->keterangan($id_siswa,$keterangan,$tanggal);
          if($ket == "Success"){
            $error = "Presensi Berhasil !";
          }else{
@@ -41,7 +45,7 @@
       }
    }
 
-
+// print_r($ambil);
 
 
  ?>
@@ -65,14 +69,16 @@
             <div class="panel-heading">
               <form class="form" action="" method="post">
                 <div class="btn-group"> <!-- categori kelas -->
-                  <select class="selectpicker" data-width="fit" name="kelas" title="Kelas">
+                  <select class="form-control" name="kelas">
+                    <option>Kelas:</option>
                     <option value="X">X</option>
                     <option value="XI">XI</option>
                     <option value="XII">XII</option>
                   </select>
                 </div> <!-- ./categori kelas -->
                 <div class="btn-group"> <!-- categori jurusan -->
-                  <select class="selectpicker" data-width="fit" name="jurusan" title="jurusan">
+                  <select class="form-control" name="jurusan">
+                    <option>Jurusan:</option>
                     <option value="TKJ 1">TKJ 1</option>
                     <option value="TKJ 2">TKJ 2</option>
                     <option value="TKR 1">TKR 1</option>
@@ -87,7 +93,8 @@
                   </select>
                 </div> <!-- ./categori jurusan -->
                 <div class="btn-group"> <!-- categori jurusan -->
-                  <select class="selectpicker" data-width="fit" name="semester" title="semester">
+                  <select class="form-control" name="semester">
+                    <option>Semester:</option>
                     <option value="semester 1">semester 1</option>
                     <option value="semester 2">semester 2</option>
                     <option value="semester 3">semester 3</option>
@@ -132,6 +139,7 @@
                     if(!empty($kelas) && !empty($jurusan) && !empty($semester) ){
 
                       while($data = $absen->fetch(PDO::FETCH_OBJ)){
+
                         echo "<tr>";
 
                             echo"<td>$data->id_siswa</td>";
@@ -144,6 +152,7 @@
                                 <input type='checkbox' name='keterangan[]' value='hadir'> hadir
                                 <input type='checkbox' name='keterangan[]' value='izin'> izin
                                 <input type='checkbox' name='keterangan[]' value='alpha'> alpha
+                                <input type='hidden' name='id_siswa[]' value='$data->id_siswa'>
                             </td>
                             ";
                         echo "</tr>";
