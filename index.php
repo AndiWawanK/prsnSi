@@ -1,7 +1,7 @@
 <?php
 session_start();
   if(isset($_SESSION['username'])){
-    header('location: view/');
+    header('location: guru/index.php');
   }
 require_once "functions/Library.php";
 
@@ -19,14 +19,15 @@ if(isset($_POST['login'])){
   while($row = $cekLogin->fetch(PDO::FETCH_OBJ)){
     $user[] = $row->level;
   }
+
   if($login != "False"){
 
      if($user[0] == 'guru'){
         $_SESSION['username'] = $username;
-        header('location: view/');
+        header('location: guru');
       }else if($user[0] == 'siswa'){
         $_SESSION['username'] = $username;
-        echo "Selamat Datang ".$user[0];
+        header('location: siswa');
       }
     }else{
       $error = "Mohon Periksa Kembali Username & Password Anda! ";
@@ -75,7 +76,7 @@ if(isset($_POST['login'])){
                           <span class="input-group-addon">
                             <i class="glyphicon glyphicon-user"></i>
                           </span>
-                          <input class="form-control" placeholder="Username" name="username" type="text" autofocus>
+                          <input class="form-control" placeholder="No Induk Siswa" name="username" type="text" autofocus>
                         </div>
                       </div>
                       <div class="form-group">
@@ -87,7 +88,7 @@ if(isset($_POST['login'])){
                         </div>
                       </div>
                       <div class="form-group">
-                        <button type="submit" name="login" class="btn btn-lg btn-primary btn-block buton-presensi">Sign In <i class="fa fa-sign-in"></i></button>
+                        <button type="submit" name="login" data-loading-text="Login..." class="btn btn-lg btn-primary btn-block buton-presensi">Sign In <i class="fa fa-sign-in"></i></button>
                       </div>
                     </div>
                   </div>
