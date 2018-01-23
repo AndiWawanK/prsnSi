@@ -11,6 +11,7 @@
 <script src="../assets/js/plugins/morris/morris-data.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-show-password/1.0.3/bootstrap-show-password.min.js"></script>
 <script>
 $( function() {
   $( "#datepicker" ).datepicker();
@@ -39,6 +40,7 @@ $('.selectpicker').selectpicker({
   style: 'btn-info',
   size: 4
 });
+$("#password").password('toggle');
 </script>
 </body>
 </html>

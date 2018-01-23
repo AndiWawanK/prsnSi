@@ -1,3 +1,22 @@
+<?php
+session_start();
+require_once "../functions/Library.php";
+$objectSiswa = new Library();
+
+  if(!isset($_SESSION['username'])){
+    header('location: ../');
+  }else{
+    $guru = $_SESSION['username'];
+
+}
+
+$cekLogin = $objectSiswa->cekLogin($guru);
+
+while($row = $cekLogin->fetch(PDO::FETCH_OBJ)){
+  $user[] = $row->level;
+  $nama[] = $row->nama_lengkap;
+}
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,12 +53,11 @@
           <!-- Menu left -->
           <ul class="nav navbar-right top-nav">
               <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Nama guru <b class="caret"></b></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>&nbsp; <?php echo $nama[0]; ?> <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href="#"><i class="fa fa-fw fa-user"></i> Profile</a></li>
-                    <li><a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a></li>
+                    <li><a href="setting.php"><i class="fa fa-fw fa-gear"></i> Settings</a></li>
+                    <li><a href="../template/logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a></li>
+                    <!-- <li class="divider"></li> -->
                   </ul>
               </li>
           </ul>
@@ -48,11 +66,19 @@
           <!-- Menu Sidebar -->
           <div class="collapse navbar-collapse navbar-ex1-collapse">
               <ul class="nav navbar-nav side-nav">
+
+              <?php if($user[0] == 'guru'){ ?>
                 <li><a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
                 <li><a href="presensi.php"><i class="fa fa-fw fa fa-hospital-o"></i> Prensesi</a></li>
                 <li><a href="data-absensi.php"><i class="fa fa-fw fa-table"></i> Rekap Absensi</a></li>
                 <li><a href="update-data.php"><i class="fa fa-fw fa-edit"></i> Update Data Siswa</a></li>
                 <li><a href="e-tugas.php"><i class="fa fa-mortar-board"></i> E-Tugas</a></li>
+              <?php }else if($user[0] == 'siswa'){ ?>
+                <li><a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
+                <li><a href=""><i class="fa fa-fw fa-book"></i> Lihat Absensi</a></li>
+              <?php }else{ ?>
+
+              <?php } ?>
               </ul>
           </div>
           <!-- Menu Sidebar -->

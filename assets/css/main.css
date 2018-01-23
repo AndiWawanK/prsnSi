@@ -14,7 +14,14 @@
 .page-wrapper{
   min-height: 700px;
 }
-
+.cari-box{
+  margin-left: -8px;
+}
+@media (max-width: 480px) {
+  .cari-box{
+    margin-left: -20px;
+  }
+}
 .side-nav{
   background-color: #222d32;
 }
@@ -53,6 +60,7 @@
   border-radius: 2px;
   height: 30px;
 }
+
 @media (max-width: 480px) {
   .calendar{
     display: none;
@@ -63,5 +71,18 @@
     width: 139px;
     height: 30px;
     margin-left: 17px;
+  }
+}
+@media (min-width: 768px){
+.modal-dialog {
+    width: 823px;
+    margin: 30px auto;
+  }
+}
+@media (min-width: 768px){
+.modal-content {
+    -webkit-box-shadow: 0 5px 15px rgba(0,0,0,.5);
+    box-shadow: 0 5px 15px rgba(0,0,0,.5);
+    width: 844px;
   }
 }

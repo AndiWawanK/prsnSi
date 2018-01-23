@@ -88,6 +88,18 @@
         }
     }
 
+    //update data siswa
+    public function updateData($id_siswa,$nis,$nama,$kelas,$jurusan,$semester){
+      $sql    = "UPDATE siswa SET nis='$nis',nama='$nama',kelas='$kelas',
+                 jurusan='$jurusan',semester='$semester' WHERE id_siswa='$id_siswa' ";
+      $query  = $this->db->query($sql);
+        if(!$query){
+          return "False";
+        }else{
+          return "True";
+        }
+    }
+
     //rekap data absensi
     public function listAbsensi(){
       $sql   = "SELECT * FROM jurusan";
@@ -111,5 +123,36 @@
       $query = $this->db->query($sql);
       return $query;
     }
+
+    //login
+    public function login($username,$password){
+      $sql    = "SELECT username,password FROM users WHERE username = (('$username'))
+                 AND password = (('$password')) LIMIT 0,1 ";
+      $query  = $this->db->query($sql);
+        if($query->fetch() > 0){
+          return $query;
+        }else{
+          return "False";
+        }
+    }
+   //cek level login
+    public function cekLogin($username){
+      $sql   = "SELECT * FROM users WHERE username = '$username' ";
+      $query = $this->db->query($sql);
+      // $cek = $query->fetch();
+      return $query;
+    }
+
+    //change password guru/siswa
+    public function updatePass($id_user,$password){
+      $sql   = "UPDATE users SET password = '$password' WHERE id_user = '$id_user' ";
+      $query = $this->db->query($sql);
+      if(!$query){
+        return "False";
+      }else{
+        return "True";
+      }
+    }
+
 }
  ?>
