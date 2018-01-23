@@ -20,17 +20,14 @@ $pages = ceil($total / $perPage );
 
 
 
-
-
-
-
-
-
-
   if(isset($_POST["search"])){
     $nis = $_POST["keyword"];
     $nama = $_POST["keyword"];
-    $siswa = $dataSiswa->cariNis($nis,$nama);
+    if(!empty(trim($nis)) && !empty(trim($nama))){
+      $siswa = $dataSiswa->cariNis($nis,$nama);
+    }else{
+      $error = "Form Pencarian Tidak Boleh Kosong!";
+    }
   }
 
 ?>
@@ -63,7 +60,7 @@ $pages = ceil($total / $perPage );
           <input type="text" class="form-control" name="keyword" placeholder="Search nis">
         </div>
         <button type="submit" class="btn btn-success" name="search"><span class="fa fa-search"></span> Cari</button>
-        <button type="submit" class="btn btn-warning" name="search"><span class="fa fa-plus"></span></button>
+        <button type="submit" class="btn btn-warning" name="reset"><span class="fa fa-plus"></span></button>
       </form>
     </nav>
     <div class="table table-responsive" style="margin-top:-20px;">
@@ -97,7 +94,7 @@ $pages = ceil($total / $perPage );
         </tbody>
       </table>
       <!-- pagination -->
-      <div class="pagination-siswa">
+      <div class="pagination-siswa text-center">
         <ul class="pagination pagination-sm">
           <?php if($page <= 1){ ?>
             <li class="previous disabled"><a href="">&laquo;</a></li>
@@ -107,7 +104,7 @@ $pages = ceil($total / $perPage );
             <li><a href="?page=<?= $page - 1; ?>">&laquo;</a></li>
           <?php } ?>
             <?php for($i=1; $i<=$pages; $i++){ ?>
-              <li><a href="?page=<?= $i; ?>"><?= $i; ?></a></li>
+                <li><a href="?page=<?= $i; ?>"><?= $i; ?></a></li>
             <?php } ?>
           <?php if($page < $pages){ ?>
             <li><a href="?page=<?= $page + 1; ?>">&raquo;</a></li>

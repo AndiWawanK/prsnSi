@@ -9,11 +9,12 @@
   color: #fff;
 }
 .pagination-siswa{
-  margin: auto;
+  margin-top: -18px;
 }
 .page-wrapper{
   min-height: 700px;
 }
+
 .side-nav{
   background-color: #222d32;
 }

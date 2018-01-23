@@ -12,7 +12,7 @@
       $query  = $this->db->query($sql);
       return $query;
     }
-
+    //pagination pada table data siswa
     public function dataSiswa($start,$perPage){
       $sql   = "SELECT * FROM siswa LIMIT $start , $perPage";
       $query = $this->db->query($sql);
@@ -44,6 +44,13 @@
           return "Success";
         }
 
+    }
+
+    //menu rekap untuk menampilkan presensi berdasarkan tanggal presensi
+    public function rekapTanggal($kelas,$jurusan,$tanggal){
+      $sql    = "INSERT INTO jurusan VALUES ('','$kelas','$jurusan','$tanggal') ";
+      $query  = $this->db->query($sql);
+      return $query;
     }
 
     //cari data sesuai menu dropdown
@@ -81,11 +88,26 @@
         }
     }
 
-
     //rekap data absensi
-    public function rekapAbsensi(){
-      $sql   = "SELECT siswa.kelas , siswa.jurusan , keterangan.tanggal FROM siswa
-                INNER JOIN keterangan ON siswa.id_siswa = keterangan.id_siswa";
+    public function listAbsensi(){
+      $sql   = "SELECT * FROM jurusan";
+      $query = $this->db->query($sql);
+      return $query;
+    }
+
+    // public function detailAbsen($jurusan,$id_siswa){
+    //   $sql   = "SELECT siswa.nis , siswa.nama , siswa.kelas , siswa.jurusan , keterangan.keterangan
+    //             FROM siswa INNER JOIN keterangan ON siswa.id_siswa = keterangan.id_siswa";
+    //   $query = $this->db->query($sql);
+    //   return $query;
+    // }
+
+    public function detailAbsen(){
+      $sql    = "SELECT siswa.nis , siswa.nama , siswa.kelas , jurusan.jurusan , keterangan.tanggal , keterangan.keterangan
+      FROM siswa
+      INNER JOIN jurusan
+      INNER JOIN keterangan ON siswa.id_siswa = keterangan.id_siswa
+      WHERE siswa.kelas = 'XII' AND jurusan.jurusan = 'TKJ 1'";
       $query = $this->db->query($sql);
       return $query;
     }

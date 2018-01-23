@@ -32,7 +32,12 @@
        $keterangan  = $_POST['keterangan'];
        $tanggal     = $_POST['tanggal'];
        $id_siswa    = $_POST['id_siswa'];
-       
+
+       $kelas = $_POST['kelas'];
+       $jurusan = $_POST['jurusan'];
+       $rekapDate = $siswa->rekapTanggal($kelas,$jurusan,$tanggal);
+       // $rekapDate = $siswa->rekapTanggal($kelas,$jurusan,$tanggal);
+
         if(!empty($keterangan) && !empty($tanggal)){
          $ket  = $siswa->keterangan($id_siswa,$keterangan,$tanggal);
          if($ket == "Success"){
@@ -44,8 +49,6 @@
         $error1 = "Anda Harus Mengiris Keterangan Absensi!";
       }
    }
-
-// print_r($ambil);
 
 
  ?>
@@ -152,6 +155,9 @@
                                 <input type='checkbox' name='keterangan[]' value='hadir'> hadir
                                 <input type='checkbox' name='keterangan[]' value='izin'> izin
                                 <input type='checkbox' name='keterangan[]' value='alpha'> alpha
+
+                                <input type='hidden' name='kelas' value='$data->kelas'>
+                                <input type='hidden' name='jurusan' value='$data->jurusan'>
                                 <input type='hidden' name='id_siswa[]' value='$data->id_siswa'>
                             </td>
                             ";

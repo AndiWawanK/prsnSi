@@ -1,0 +1,5 @@
+SELECT siswa.nis , siswa.nama , siswa.kelas , jurusan.jurusan , keterangan.tanggal , keterangan.keterangan
+FROM siswa
+INNER JOIN jurusan
+INNER JOIN keterangan ON siswa.id_siswa = keterangan.id_siswa
+WHERE siswa.kelas = 'X' AND jurusan.jurusan = 'TAV'

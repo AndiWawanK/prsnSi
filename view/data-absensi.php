@@ -2,8 +2,15 @@
 require_once "../template/header.php";
 require_once "../functions/Library.php";
 $siswa = new Library();
-$data = $siswa->rekapAbsensi();
-$rekapAbsen = $siswa->detailAbsen();
+$data = $siswa->listAbsensi();
+$view = $siswa->detailAbsen();
+if(isset($_GET['lihat'])){
+    // $kelas = $_POST['kelas'];
+    // $jurusan = $_POST['jurusan'];
+    $view = $siswa->detailAbsen($kelas,$jurusan);
+    echo "true";
+}
+
 ?>
 
 <!-- Page Heading -->
@@ -65,24 +72,26 @@ $rekapAbsen = $siswa->detailAbsen();
                   </tr>
                 </thead>
                 <tbody>
+
+
               <?php
-
-
-                  while($row = $data->fetch(PDO::FETCH_OBJ)){
+                while($row = $data->fetch(PDO::FETCH_OBJ)){
                     echo "
-                    <tr>
-                      <td>$row->kelas</td>
-                      <td>$row->jurusan</td>
-                      <td>$row->tanggal</td>
-                      <td>
-                        <a href='' class='btn btn-danger btn-xs'><i class='fa fa-cloud-download'></i> Download</a>
-                        <a href='' class='btn btn-info btn-xs' data-toggle='modal' data-target='#myModal'><i class='fa fa-eye'></i> View</a>
-                      </td>
-                    </tr>
-                    ";
+                     <tr>
+                       <td>$row->kelas</td>
+                       <td>$row->jurusan</td>
+                       <td>$row->tanggal</td>
+                       <td>
 
-                  }
+                           <a href='' class='btn btn-danger btn-xs'><i class='fa fa-cloud-download'></i> Download</a>
+                           <button type='submit' class='btn btn-info btn-xs' name='lihat' data-toggle='modal' data-target='#myModal1'><i class='fa fa-eye'></i> View</button>
+                           <input type='hidden' name='kelas' value='$row->kelas'>
+                           <input type='hidden' name='jurusan' value='$row->jurusan'>
+
+                     ";
+                   }
                 ?>
+
 
                   <!-- <tr>
                     <td>XII</td>
@@ -93,8 +102,10 @@ $rekapAbsen = $siswa->detailAbsen();
                       <button type="button" class="btn btn-info btn-xs"><i class="fa fa-eye"></i> View</button>
                     </td>
                   </tr> -->
+
                 </tbody>
               </table>
+              <!-- <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal1">Launch demo modal</button> -->
             </div>
           </div>
         </div>
@@ -119,50 +130,55 @@ $rekapAbsen = $siswa->detailAbsen();
     </div>
   </div>
 <!-- data-absensi -->
-<!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="myModalLabel">View Presensi</h4>
-        </div>
-        <div class="modal-body">
-          <!-- table -->
-            <div class="table table-responsive">
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>NIS:</th>
-                    <th>NAMA:</th>
-                    <th>KELAS:</th>
-                    <th>JURSAN:</th>
-                    <th>KETERANGAN:</th>
-                  </tr>
-                </thead>
-                <?php
-                while($rekap = $rekapAbsen->fetch(PDO::FETCH_OBJ)){
-                  echo "
-                  <tr>
-                    <td>$rekap->nis</td>
-                    <td>$rekap->nama</td>
-                    <td>$rekap->kelas</td>
-                    <td>$rekap->jurusan</td>
-                    <td>$rekap->keterangan</td>
-                  </tr>
-                  ";
-                }
-                 ?>
-              </table>
-            </div>
-          <!-- table -->
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-warning buton-presensi">Update</button>
-          <button type="button" class="btn btn-primary buton-presensi" data-dismiss="modal">Close</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
+
+<div class='modal fade' id='myModal1' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+  <div class='modal-dialog'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
+        <h4 class='modal-title' id='myModalLabel'>View Presensi</h4>
+      </div>
+      <div class='modal-body'>
+
+          <div class='table table-responsive'>
+            <table class='table table-bordered'>
+              <thead>
+                <tr>
+                  <th>NIS:</th>
+                  <th>NAMA:</th>
+                  <th>KELAS:</th>
+                  <th>JURUSAN:</th>
+                  <th>TANGGAL:</th>
+                  <th>KETERANGAN:</th>
+                </tr>
+              </thead>
+              <?php
+              while($det = $view->fetch(PDO::FETCH_OBJ)){
+                echo "
+                <tr>
+                  <td>$det->nis</td>
+                  <td>$det->nama</td>
+                  <td>$det->kelas</td>
+                  <td>$det->jurusan</td>
+                  <td>$det->tanggal</td>
+                  <td>$det->keterangan</td>
+                </tr>
+                ";
+              }
+              ?>
+            </table>
+          </div>
+
+      </div>
+      <div class='modal-footer'>
+        <button type='button' class='btn btn-warning buton-presensi'>Update</button>
+        <button type='button' class='btn btn-primary buton-presensi' data-dismiss='modal'>Close</button>
+      </div>
+    </div>
+  </div>
 </div>
-<!-- /.modal -->
+</td>
+</tr>
+
+
 <?php require_once "../template/footer.php" ?>
