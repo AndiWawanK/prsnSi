@@ -14,6 +14,44 @@
 .page-wrapper{
   min-height: 700px;
 }
+.detail-guru{
+  min-width: 500px;
+  float: left;
+}
+.modal-body {
+  position: none;
+  padding: 15px;
+}
+.modal-footer {
+  padding: 15px;
+  text-align: right;
+  border-top: 1px solid #e5e5e5;
+  margin-top: 281px;
+}
+.profile-guru img{
+  width: 204px;
+}
+@media (max-width: 480px) {
+  .modal-footer{
+    margin-top: 23px;
+  }
+}
+@media (max-width: 872px) {
+  .modal-footer{
+    margin-top: 23px;
+  }
+}
+.dropdown-toggle img{
+  width: 36px;
+  padding: 0px 0px;
+  position: absolute;
+  margin-left: -36px;
+  margin-top: -7px;
+}
+.top-nav>li>a:hover, .top-nav>li>a:focus, .top-nav>.open>a, .top-nav>.open>a:hover, .top-nav>.open>a:focus {
+  color: #fff;
+  background-color: #3c8dbc;
+}
 .cari-box{
   margin-left: -8px;
 }
@@ -85,4 +123,7 @@
     box-shadow: 0 5px 15px rgba(0,0,0,.5);
     width: 844px;
   }
+}
+.nav-side-menu a{
+  padding: 5px 10px;
 }

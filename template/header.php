@@ -4,11 +4,10 @@ require_once "../functions/Library.php";
 $objectSiswa = new Library();
 
   if(!isset($_SESSION['username'])){
-    header('location: ../');
+    header('location: ../index.php');
   }else{
     $guru = $_SESSION['username'];
-
-}
+  }
 
 $cekLogin = $objectSiswa->cekLogin($guru);
 
@@ -16,6 +15,7 @@ while($row = $cekLogin->fetch(PDO::FETCH_OBJ)){
   $user[] = $row->level;
   $nama[] = $row->nama_lengkap;
 }
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +53,8 @@ while($row = $cekLogin->fetch(PDO::FETCH_OBJ)){
           <!-- Menu left -->
           <ul class="nav navbar-right top-nav">
               <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>&nbsp; <?php echo $nama[0]; ?> <b class="caret"></b></a>
+                  <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>&nbsp; <b class="caret"></b></a> -->
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="../assets/profile/people.png" class="profile"></i>&nbsp; <?php echo $nama[0]; ?> <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li><a href="setting.php"><i class="fa fa-fw fa-gear"></i> Settings</a></li>
                     <li><a href="../template/logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a></li>
@@ -76,8 +77,22 @@ while($row = $cekLogin->fetch(PDO::FETCH_OBJ)){
               <?php }else if($user[0] == 'siswa'){ ?>
                 <li><a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
                 <li><a href=""><i class="fa fa-fw fa-book"></i> Lihat Absensi</a></li>
-              <?php }else{ ?>
 
+              <?php }else if($user[0] == 'admin'){ ?>
+                <li><a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
+                <li><a href="data-guru.php"><i class="fa fa-fw fa-tasks"></i> Data Guru</a></li>
+                <li><a href="data-siswa.php"><i class="fa fa-fw fa-tasks"></i> Data Siswa</a></li>
+                <div class="nav-side-menu">
+                  <li data-toggle="collapse" data-target="#new" class="collapsed">
+                    <a href="#"><i class="fa fa-car fa-lg"></i> New <span class="arrow"></span></a>
+                  </li>
+                  <ul class="sub-menu collapse" id="new">
+                    <li>New New 1</li>
+                    <li>New New 2</li>
+                    <li>New New 3</li>
+                  </ul>
+                </div>
+              <?php }else{ ?>
               <?php } ?>
               </ul>
           </div>

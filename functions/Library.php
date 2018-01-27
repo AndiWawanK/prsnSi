@@ -154,5 +154,12 @@
       }
     }
 
+    //Data Guru
+    public function data_guru(){
+      $sql    = "SELECT * FROM guru";
+      $query  = $this->db->query($sql);
+      return $query;
+    }
+
 }
  ?>

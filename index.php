@@ -1,8 +1,11 @@
 <?php
 session_start();
+
   if(isset($_SESSION['username'])){
-    header('location: guru/index.php');
+    header('location: siswa');
   }
+
+
 require_once "functions/Library.php";
 
 $data = new Library();
@@ -24,10 +27,13 @@ if(isset($_POST['login'])){
 
      if($user[0] == 'guru'){
         $_SESSION['username'] = $username;
-        header('location: guru');
+        header('location: guru/');
       }else if($user[0] == 'siswa'){
         $_SESSION['username'] = $username;
-        header('location: siswa');
+        header('location: siswa/');
+      }else if($user[0] == 'admin'){
+        $_SESSION['username'] = $username;
+        header('location: admin/');
       }
     }else{
       $error = "Mohon Periksa Kembali Username & Password Anda! ";
