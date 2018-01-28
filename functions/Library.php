@@ -160,6 +160,17 @@
       $query  = $this->db->query($sql);
       return $query;
     }
+    //tambah data guru
+    public function tambah_guru($nip,$nama,$tanggal_lahir,$pangkat,$status,$mapel,$pendidikan,$foto_profile){
+      $sql    = "INSERT INTO guru (nip,nama,tanggal_lahir,pangkat,status,mapel,pendidikan,foto_profile)
+                 VALUES ('$nip','$nama','$tanggal_lahir','$pangkat','$status','$mapel','$pendidikan','$foto_profile')";
+      $query  = $this->db->query($sql);
+        if(!$query){
+          return "False";
+        }else{
+          return "True";
+        }
 
+    }
 }
  ?>

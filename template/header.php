@@ -33,6 +33,9 @@ while($row = $cekLogin->fetch(PDO::FETCH_OBJ)){
   <link href="../assets/css/main.css" rel="stylesheet">
   <link href="../assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css">
+
+
 </head>
 <body>
 
@@ -80,18 +83,20 @@ while($row = $cekLogin->fetch(PDO::FETCH_OBJ)){
 
               <?php }else if($user[0] == 'admin'){ ?>
                 <li><a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
-                <li><a href="data-guru.php"><i class="fa fa-fw fa-tasks"></i> Data Guru</a></li>
-                <li><a href="data-siswa.php"><i class="fa fa-fw fa-tasks"></i> Data Siswa</a></li>
-                <div class="nav-side-menu">
-                  <li data-toggle="collapse" data-target="#new" class="collapsed">
-                    <a href="#"><i class="fa fa-car fa-lg"></i> New <span class="arrow"></span></a>
-                  </li>
-                  <ul class="sub-menu collapse" id="new">
-                    <li>New New 1</li>
-                    <li>New New 2</li>
-                    <li>New New 3</li>
+                <li><a href="#" class="toggle-custom" id="btn-1" data-toggle="collapse" data-target="#dataguru" aria-expanded="false"><span class="fa fa-tw fa-tasks" aria-hidden="true"></span> Data Guru</a>
+                  <ul class="nav collapse" id="dataguru" role="menu" aria-labelledby="btn-1">
+                    <li><a href="data-guru.php"><i class="fa fa-database"></i> Data Guru</a></li>
+                    <li><a href="tambah_guru.php"><i class="fa fa-plus"></i> Tambah</a></li>
                   </ul>
-                </div>
+                </li>
+                <li><a href="#" class="toggle-custom" id="btn-1" data-toggle="collapse" data-target="#datasiswa" aria-expanded="false"><span class="fa fa-tw fa-graduation-cap" aria-hidden="true"></span> Data Siswa</a>
+                  <ul class="nav collapse" id="datasiswa" role="menu" aria-labelledby="btn-1">
+                    <li><a href="data-siswa.php"><i class="fa fa-database"></i> Data Siswa</a></li>
+                    <li><a href="tambah_siswa.php"><i class="fa fa-plus"></i> Tambah</a></li>
+                  </ul>
+                </li>
+
+
               <?php }else{ ?>
               <?php } ?>
               </ul>

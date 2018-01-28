@@ -91,12 +91,12 @@ $guru = $objectSiswa->data_guru();
                         </table>
                         </div>
                         <div class='col-md-4 profile-guru text-center'>
-                          <img src='../assets/profile/people.png'>
+                          <img src='../assets/profile/$row->foto_profile'>
                         </div>
                         </div>
                         <div class='modal-footer'>
-                          <button type='button' class='btn btn-default' data-dismiss='modal'><i class='fa fa-times'></i> Close</button>
-                          <button type='button' class='btn btn-primary'>Save changes</button>
+                          <button type='button' class='btn btn-default buton-presensi' data-dismiss='modal'><i class='fa fa-times'></i> Close</button>
+                          <button type='button' class='btn btn-primary buton-presensi'>Edit</button>
                         </div>
                       </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
