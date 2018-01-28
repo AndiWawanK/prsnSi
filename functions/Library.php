@@ -170,7 +170,11 @@
         }else{
           return "True";
         }
+      }
 
+    //tampil siswa berdasarkan kelas
+    public function tampil_siswa(){
+      // $sql   = "SELECT siswa.nis,siswa.nama,siswa.kelas"
     }
 }
  ?>

@@ -44,7 +44,7 @@
            echo "Gagal";
          }
       }else{
-        $error1 = "Anda Harus Mengiris Keterangan Absensi!";
+        $error1 = "Anda Harus Mengisi Keterangan Absensi!";
       }
    }
 
