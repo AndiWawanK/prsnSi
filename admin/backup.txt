@@ -1,0 +1,4 @@
+SELECT guru.nama , mapel_guru.id_guru , mapel_guru.id_mapel , mapel.nama
+FROM mapel_guru
+INNER JOIN mapel ON mapel_guru.id_mapel = mapel.id_mapel
+INNER JOIN guru ON mapel_guru.id_guru = guru.id_guru

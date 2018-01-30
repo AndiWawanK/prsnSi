@@ -190,9 +190,7 @@
                 <?php } ?>
                 <button type="submit" name="absen" class="btn btn-success buton-presensi">Submit Presensi</button>
                 <div class="btn-group tanggal-presen">
-                  <ul class="nav navbar-nav navbar-right">
-                    <li><span class="calendar">Tanggal:</span> <input type="text" id="date" name="date" placeholder="Isi Tanggal"></li>
-                  </ul>
+                  <span class="calendar">Tanggal:</span> <input type="text" id="date" name="date" placeholder="Isi Tanggal">
                 </div>
               </form><br>
 

@@ -20,7 +20,7 @@ if(isset($_POST['tambah'])){
 if(isset($_GET['delete'])){
   $det = $_GET['delete'];
   $delete = $objectSiswa->delete_mapel($det);
-  var_dump($delete);
+  header('Refresh:0; url=tambah_mapel.php');
 }
 ?>
 

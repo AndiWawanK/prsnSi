@@ -4,6 +4,11 @@ if($_SESSION['status'] !== 'admin'){
   header('location: ../index.php');
 }
 $guru = $objectSiswa->data_guru();
+if(isset($_GET['delet'])){
+  $delete = $_GET['delet'];
+  $delet = $objectSiswa->delete_data_guru($_GET['delet']);
+  header('Refresh:0; url=data-guru.php');
+}
 ?>
 
 <!-- Page Heading -->
@@ -49,6 +54,7 @@ $guru = $objectSiswa->data_guru();
                 <td>$row->pendidikan</td>
                 <td>
                   <a href='' id='$row->id_guru' class='btn btn-info btn-xs' data-toggle='modal' data-target='#myModal$row->id_guru'><i class='fa fa-eye'></i> View</a>
+                  <a href='?delet=$row->id_guru' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i> Delete</a>
                   <div class='modal fade' id='myModal$row->id_guru' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
                     <div class='modal-dialog'>
                       <div class='modal-content'>
@@ -85,6 +91,10 @@ $guru = $objectSiswa->data_guru();
                             <th>PENDIDIKAN</th>
                             <td>$row->pendidikan</td>
                           </tr>
+                          <tr>
+                            <th>MATA PELAJARAN</th>
+                            <td>Matematika</td><br>
+                          </tr>
                         </table>
                         </div>
                         <div class='col-md-4 profile-guru text-center'>
@@ -93,7 +103,7 @@ $guru = $objectSiswa->data_guru();
                         </div>
                         <div class='modal-footer'>
                           <button type='button' class='btn btn-default buton-presensi' data-dismiss='modal'><i class='fa fa-times'></i> Close</button>
-                          <button type='button' class='btn btn-primary buton-presensi'>Edit</button>
+                          <a href='edit_guru.php?id=$row->id_guru' class='btn btn-primary buton-presensi'>Edit</a>
                         </div>
                       </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->

@@ -106,7 +106,7 @@ $tampil_mapel = $objectSiswa->tampil_mapel();
              <div class="input-group-addon">
               <i class="fa fa-calendar"></i>
              </div>
-             <input type="text" name="date" class="form-control" id="date" placeholder="MM/DD/YYYY">
+             <input type="text" name="date" class="form-control" id="date" placeholder="Tanggal Lahir / MM/DD/YYYY">
             </div>
           </div>
           <div class="form-group">
@@ -135,6 +135,7 @@ $tampil_mapel = $objectSiswa->tampil_mapel();
           </div>
           <div class="form-group">
             <select class="form-control" id="kelas" name="kelas" disabled>
+              <option>Pilih Kelas</option>
               <?php while($ambil_k = $ambil_kelas->fetch()){ ?>
                 <option value="<?php echo $ambil_k[0]; ?>"><?php echo $ambil_k[0]; ?></option>
               <?php } ?>

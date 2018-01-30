@@ -240,14 +240,25 @@
     }
     //delete mapel
     public function delete_mapel($id_mapel){
-      $sql   = "DELETE * FROM mapel WHERE id_mapel='$id_mapel'";
+      $sql   = "DELETE FROM mapel WHERE id_mapel='$id_mapel'";
       $query = $this->db->query($sql);
       if(!$query){
         return "False";
       }else{
         return "True";
       }
-
+    }
+    //delete data guru
+    public function delete_data_guru($id_guru){
+      $sql   = "DELETE FROM guru WHERE id_guru='$id_guru' ";
+      $query = $this->db->query($sql);
+      return $query;
+    }
+    //edit data guru
+    public function edit_guru($id_guru){
+      $sql    = "SELECT * FROM guru WHERE id_guru = '$id_guru' ";
+      $query  = $this->db->query($sql);
+      return $query;
     }
 }
  ?>
