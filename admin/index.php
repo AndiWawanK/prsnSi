@@ -1,5 +1,8 @@
 <?php
 require_once "../template/header.php";
+if($_SESSION['status'] !== 'admin'){
+  header('location: ../index.php');
+}
 
 $data  = $objectSiswa->jumlahData();
 ?>

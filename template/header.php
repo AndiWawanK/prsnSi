@@ -1,9 +1,10 @@
+<?php ob_start(); ?>
 <?php
 session_start();
 require_once "../functions/Library.php";
 $objectSiswa = new Library();
 
-  if(!isset($_SESSION['username'])){
+  if(!isset($_SESSION['username']) OR !isset($_SESSION['status'])){
     header('location: ../index.php');
   }else{
     $guru = $_SESSION['username'];
@@ -32,9 +33,11 @@ while($row = $cekLogin->fetch(PDO::FETCH_OBJ)){
   <link href="../assets/css/plugins/morris.css" rel="stylesheet">
   <link href="../assets/css/main.css" rel="stylesheet">
   <link href="../assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="../assets/css/multi-select.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/img/switch.png">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css">
-
+  <script src="../assets/js/jquery.js"></script>
 
 </head>
 <body>
@@ -50,7 +53,7 @@ while($row = $cekLogin->fetch(PDO::FETCH_OBJ)){
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="index.html">Absensi <b>Siswa</b></a>
+              <a class="navbar-brand" href="index.php">Absensi <b>Siswa</b></a>
           </div>
 
           <!-- Menu left -->
@@ -76,10 +79,6 @@ while($row = $cekLogin->fetch(PDO::FETCH_OBJ)){
                 <li><a href="presensi.php"><i class="fa fa-fw fa fa-hospital-o"></i> Prensesi</a></li>
                 <li><a href="data-absensi.php"><i class="fa fa-fw fa-table"></i> Rekap Absensi</a></li>
                 <li><a href="update-data.php"><i class="fa fa-fw fa-edit"></i> Update Data Siswa</a></li>
-                <li><a href="e-tugas.php"><i class="fa fa-mortar-board"></i> E-Tugas</a></li>
-              <?php }else if($user[0] == 'siswa'){ ?>
-                <li><a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
-                <li><a href=""><i class="fa fa-fw fa-book"></i> Lihat Absensi</a></li>
 
               <?php }else if($user[0] == 'admin'){ ?>
                 <li><a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
@@ -95,7 +94,7 @@ while($row = $cekLogin->fetch(PDO::FETCH_OBJ)){
                     <li><a href="tambah_siswa.php"><i class="fa fa-plus"></i> Tambah</a></li>
                   </ul>
                 </li>
-
+                <li><a href="tambah_mapel.php"><i class="fa fa-book"></i> Mata Pelajaran</a></li>
 
               <?php }else{ ?>
               <?php } ?>

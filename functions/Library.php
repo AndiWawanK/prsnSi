@@ -161,9 +161,9 @@
       return $query;
     }
     //tambah data guru
-    public function tambah_guru($nip,$nama,$tanggal_lahir,$pangkat,$status,$mapel,$pendidikan,$foto_profile){
-      $sql    = "INSERT INTO guru (nip,nama,tanggal_lahir,pangkat,status,mapel,pendidikan,foto_profile)
-                 VALUES ('$nip','$nama','$tanggal_lahir','$pangkat','$status','$mapel','$pendidikan','$foto_profile')";
+    public function tambah_guru($nip,$nama,$tanggal_lahir,$pangkat,$status,$pendidikan,$foto_profile){
+      $sql    = "INSERT INTO guru (nip,nama,tanggal_lahir,pangkat,status,pendidikan,foto_profile)
+                 VALUES ('$nip','$nama','$tanggal_lahir','$pangkat','$status','$pendidikan','$foto_profile')";
       $query  = $this->db->query($sql);
         if(!$query){
           return "False";
@@ -172,9 +172,82 @@
         }
       }
 
-    //tampil siswa berdasarkan kelas
-    public function tampil_siswa(){
-      // $sql   = "SELECT siswa.nis,siswa.nama,siswa.kelas"
+      //tambah user
+      public function tambah_user($nama_lengkap,$username,$password,$wali){
+        $sql   = "INSERT INTO users VALUES ('','$nama_lengkap','$username','$password','guru','$wali')";
+        $query = $this->db->query($sql);
+        if(!$query){
+          return "False";
+        }else{
+          return "True";
+        }
+      }
+      //tampilkan semua kelas yang ada
+      public function ambil_kelas(){
+        $sql   = "SELECT DISTINCT jurusan FROM siswa";
+        $query = $this->db->query($sql);
+        return $query;
+      }
+      //input data ke table wali
+      public function input_wali($username,$kelas){
+        $sql   = "INSERT INTO wali VALUES ('$username','$kelas')";
+        $query = $this->db->query($sql);
+        if(!$query){
+          return "False";
+        }else{
+          return "True";
+        }
+      }
+
+      //untuk anu ini yang ke mapel guru
+      public function mapel_guru($id_guru,$id_mapel){
+        $sql   = "INSERT INTO mapel_guru VALUES ('$id_guru','$id_mapel')";
+        $query = $this->db->query($sql);
+        if(!$query){
+          return "False";
+        }else{
+          return "True";
+        }
+      }
+      //max id guru
+      public function max_guru(){
+        $sql   = "SELECT MAX(id_guru) AS 'id_guru' FROM guru";
+        $query = $this->db->query($sql);
+        return $query;
+      }
+    //tampil sub jurusan
+    public function tampil_sub_jurusan($jurusan){
+      $sql   = "SELECT DISTINCT jurusan FROM siswa WHERE jurusan LIKE '%$jurusan%'";
+      $query = $this->db->query($sql);
+      return $query;
+    }
+
+    //tambah mata pelajaran
+    public function tambah_mapel($mapel){
+      $sql   = "INSERT INTO mapel VALUES ('','$mapel')";
+      $query = $this->db->query($sql);
+      if(!$query){
+        return "False";
+      }else{
+        return "True";
+      }
+    }
+    //Tampil mata pelajaran
+    public function tampil_mapel(){
+      $sql   = "SELECT * FROM mapel";
+      $query = $this->db->query($sql);
+      return $query;
+    }
+    //delete mapel
+    public function delete_mapel($id_mapel){
+      $sql   = "DELETE * FROM mapel WHERE id_mapel='$id_mapel'";
+      $query = $this->db->query($sql);
+      if(!$query){
+        return "False";
+      }else{
+        return "True";
+      }
+
     }
 }
  ?>

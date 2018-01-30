@@ -1,6 +1,10 @@
 <?php
 require_once "../template/header.php";
 
+if($_SESSION['status'] !== 'guru'){
+  header('location: ../index.php');
+}
+
 $data = $objectSiswa->listAbsensi();
 $view = $objectSiswa->detailAbsen();
 if(isset($_GET['lihat'])){

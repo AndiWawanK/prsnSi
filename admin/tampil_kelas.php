@@ -1,6 +1,8 @@
 <?php
 require_once "../template/header.php";
-
+if($_SESSION['status'] !== 'admin'){
+  header('location: ../index.php');
+}
 $siswa = $objectSiswa->presensi();
 if(isset($_POST['cari'])){
   $kelas   = $_POST['kelas'];
@@ -10,7 +12,9 @@ if(isset($_POST['cari'])){
     $siswa = $objectSiswa->cari($kelas,$jurusan);
   }
 }
+$sub = $objectSiswa->tampil_sub_jurusan($_GET['jurusan']);
 
+// var_dump($sub_jur[1]);
 ?>
 
 <!-- Page Heading -->
@@ -43,13 +47,12 @@ if(isset($_POST['cari'])){
             <div class="btn-group">
               <select class="form-control" name="jurusan">
                 <option>Sub-Jurusan</option>
-                <?php if($jurusan == 'TKJ'){ ?>
-                  <option value="TKJ 1">TKJ 1</option>
-                  <option value="TKJ 2">TKJ 2</option>
-                <?php }else if($jurusan == 'TKR'){ ?>
-                  <option value="TKJ 1">TKR 1</option>
-                  <option value="TKJ 2">TKR 2</option>
+
+
+                <?php while($row = $sub->fetch()){ ?>
+                   <option value="<?php echo $sub_jur = $row[0] ?>"><?php echo $sub_jur = $row[0] ?></option>
                 <?php } ?>
+
               </select>
             </div>
             <div class="btn-group">
@@ -91,7 +94,7 @@ if(isset($_POST['cari'])){
                   <table class='table table-bordered' style='margin-top:-20px;'>
                     <thead>
                       <tr>
-                        <td class='text-center'>Silahkan Pili Kelas dan Sub-Jurusan!</td>
+                        <td class='text-center'>Silahkan Pilih Kelas dan Sub-Jurusan!</td>
                       <tr>
                     </thead>
                   </table>

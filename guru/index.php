@@ -2,6 +2,10 @@
 
 require_once "../template/header.php";
 
+if($_SESSION['status'] !== 'guru'){
+  header('location: ../index.php');
+}
+
 
 $data  = $objectSiswa->jumlahData();
 

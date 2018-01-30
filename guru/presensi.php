@@ -1,5 +1,8 @@
 <?php
  require_once "../template/header.php";
+ if($_SESSION['status'] !== 'guru'){
+   header('location: ../index.php');
+ }
  $error = ""; //Menampilkan pesan error atau berhasil
  $error1= "";
  $kelas = ""; //menangkap nilai dari menu kelas
@@ -28,7 +31,7 @@
      //cek apakah keterangan presensi selesai di input
 
        $keterangan  = $_POST['keterangan'];
-       $tanggal     = $_POST['tanggal'];
+       $tanggal     = $_POST['date'];
        $id_siswa    = $_POST['id_siswa'];
 
        $kelas = $_POST['kelas'];
@@ -188,7 +191,7 @@
                 <button type="submit" name="absen" class="btn btn-success buton-presensi">Submit Presensi</button>
                 <div class="btn-group tanggal-presen">
                   <ul class="nav navbar-nav navbar-right">
-                    <li><span class="calendar">Tanggal:</span> <input type="text" id="datepicker" name="tanggal" placeholder="Isi Tanggal"></li>
+                    <li><span class="calendar">Tanggal:</span> <input type="text" id="date" name="date" placeholder="Isi Tanggal"></li>
                   </ul>
                 </div>
               </form><br>

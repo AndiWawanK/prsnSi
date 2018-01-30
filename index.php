@@ -2,7 +2,7 @@
 session_start();
 
   if(isset($_SESSION['username'])){
-    header('location: siswa');
+    header('location: guru');
   }
 
 
@@ -26,13 +26,12 @@ if(isset($_POST['login'])){
   if($login != "False"){
 
      if($user[0] == 'guru'){
-        $_SESSION['username'] = $username;
+       $_SESSION['username'] = $username;
+        $_SESSION['status'] = 'guru';
         header('location: guru/');
-      }else if($user[0] == 'siswa'){
-        $_SESSION['username'] = $username;
-        header('location: siswa/');
       }else if($user[0] == 'admin'){
         $_SESSION['username'] = $username;
+        $_SESSION['status'] = 'admin';
         header('location: admin/');
       }
     }else{

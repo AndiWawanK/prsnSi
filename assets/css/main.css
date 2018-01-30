@@ -53,6 +53,14 @@
   border-color: #d0d4db;
   text-decoration: none;
 }
+.action-mapel{
+  width: 150px;
+}
+@media (max-width: 480px) {
+  .action-mapel{
+    width: 100px;
+  }
+}
 @media (max-width: 480px) {
   .modal-footer{
     margin-top: 23px;

@@ -1,6 +1,9 @@
 <?php ob_start(); ?>
 <?php
 require_once "../template/header.php";
+if($_SESSION['status'] !== 'guru'){
+  header('location: ../index.php');
+}
 
 $error = "";
 $perPage = 9;

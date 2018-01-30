@@ -1,14 +1,19 @@
 <?php
 require_once "../template/header.php";
+if($_SESSION['status'] !== 'admin'){
+  header('location: ../index.php');
+}
 $error = "";
 $success = "";
+$ambil_kelas = $objectSiswa->ambil_kelas();
+$tampil_mapel = $objectSiswa->tampil_mapel();
+
   if(isset($_POST['submit'])){
     $nip    = htmlspecialchars($_POST['nip']);
     $nama   = htmlspecialchars($_POST['nama']);
     $tanggal_lahir  = htmlspecialchars($_POST['date']);
     $pangkat = htmlspecialchars($_POST['pangkat']);
     $status  = htmlspecialchars($_POST['status']);
-    $mapel   = htmlspecialchars($_POST['mapel']);
     $pendidikan = htmlspecialchars($_POST['pendidikan']);
 
     $foto_profile = $_FILES['foto']['name'];
@@ -29,12 +34,32 @@ $success = "";
     }
     move_uploaded_file($tmp_name,"../assets/profile/".$foto_profile);
 
-    $tambah_guru = $objectSiswa->tambah_guru($nip,$nama,$tanggal_lahir,$pangkat,$status,$mapel,$pendidikan,$foto_profile);
+    $tambah_guru = $objectSiswa->tambah_guru($nip,$nama,$tanggal_lahir,$pangkat,$status,$pendidikan,$foto_profile);
       if($tambah_guru == "True"){
         $success = "Data berhasil ditambahkan";
       }else{
         $error = "Ada Masalah Saat Menambah Data!";
       }
+      $id_guru = $objectSiswa->max_guru();
+      while($sam = $id_guru->fetch(PDO::FETCH_OBJ)){
+        $kau = $sam->id_guru;
+      }
+      $id_guru = $kau;
+      $pelajaran = $_POST['my-select'];
+      foreach ($pelajaran as $value) {
+        $objectSiswa->mapel_guru($id_guru,$value);
+      }
+
+      //tambah user login guru
+      if($_POST['wali'] == 'Y'){
+        $wali = 'Y';
+        $kelas = $_POST['kelas'];
+        $objectSiswa->input_wali($nip,$kelas);
+      }else{
+        $wali = 'T';
+      }
+      $objectSiswa->tambah_user($nama,$nip,$tanggal_lahir,$wali);
+
   }
 
 ?>
@@ -91,10 +116,29 @@ $success = "";
             <input type="text" name="status" class="form-control" placeholder="Status">
           </div>
           <div class="form-group">
-            <input type="text" name="mapel" class="form-control" placeholder="Mata Pelajaran">
+            <select multiple="multiple" id="my-select" name="my-select[]">
+              <option disabled>Pilih Mata Pelajaran</option>
+              <?php while($tampil = $tampil_mapel->fetch(PDO::FETCH_OBJ)){ ?>
+              <option value='<?php echo $tampil->id_mapel; ?>'><?php echo $tampil->nama; ?></option>
+              <?php } ?>
+            </select>
           </div>
           <div class="form-group">
             <input type="text" name="pendidikan" class="form-control" placeholder="Pendidikan">
+          </div>
+          <div class="form-group">
+            <label for="wali">Wali?</label>
+            <select class="form-control" id="wali" name="wali" onchange="disable_kelas()">
+              <option value="T">Tidak</option>
+              <option value="Y">Ya</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <select class="form-control" id="kelas" name="kelas" disabled>
+              <?php while($ambil_k = $ambil_kelas->fetch()){ ?>
+                <option value="<?php echo $ambil_k[0]; ?>"><?php echo $ambil_k[0]; ?></option>
+              <?php } ?>
+            </select>
           </div>
           <div class="form-group">
             <label>Profile Guru</label>
@@ -114,4 +158,14 @@ $success = "";
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  function disable_kelas(){
+    var pilihan = $('#wali').val();
+    if (pilihan === 'Y') {
+      $('#kelas').prop('disabled',false);
+    } else {
+      $('#kelas').prop('disabled',true);
+    }
+  }
+</script>
 <?php require_once "../template/footer.php" ?>

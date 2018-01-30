@@ -1,5 +1,8 @@
 <?php
 require_once "../template/header.php";
+if($_SESSION['status'] !== 'guru'){
+  header('location: ../index.php');
+}
 $error = "";
 $berhasil = "";
   if(isset($_POST["tambah"])){

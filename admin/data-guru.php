@@ -1,5 +1,8 @@
 <?php
 require_once "../template/header.php";
+if($_SESSION['status'] !== 'admin'){
+  header('location: ../index.php');
+}
 $guru = $objectSiswa->data_guru();
 ?>
 
@@ -27,7 +30,6 @@ $guru = $objectSiswa->data_guru();
               <th>TANGGAL LAHIR</th>
               <th>PANGKAT</th>
               <th>STATUS</th>
-              <th>MAPEL</th>
               <th>PENDIDIKAN</th>
               <th>DETAIL</th>
             </tr>
@@ -44,7 +46,6 @@ $guru = $objectSiswa->data_guru();
                 <td>$row->tanggal_lahir</td>
                 <td>$row->pangkat</td>
                 <td>$row->status</td>
-                <td>$row->mapel</td>
                 <td>$row->pendidikan</td>
                 <td>
                   <a href='' id='$row->id_guru' class='btn btn-info btn-xs' data-toggle='modal' data-target='#myModal$row->id_guru'><i class='fa fa-eye'></i> View</a>
@@ -79,10 +80,6 @@ $guru = $objectSiswa->data_guru();
                           <tr>
                             <th>STATUS</th>
                             <td>$row->status</td>
-                          </tr>
-                          <tr>
-                            <th>MAPEL</th>
-                            <td>$row->mapel</td>
                           </tr>
                           <tr>
                             <th>PENDIDIKAN</th>

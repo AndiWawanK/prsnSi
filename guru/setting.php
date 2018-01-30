@@ -1,6 +1,10 @@
 <?php
 require_once "../template/header.php";
 
+if($_SESSION['status'] !== 'guru'){
+  header('location: ../index.php');
+}
+
 $cekLogin = $objectSiswa->cekLogin($guru);
 $error = "";
 $success = "";
