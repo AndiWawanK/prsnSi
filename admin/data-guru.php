@@ -4,11 +4,13 @@ if($_SESSION['status'] !== 'admin'){
   header('location: ../index.php');
 }
 $guru = $objectSiswa->data_guru();
+$guru_map = $objectSiswa->guru_mapel();
 if(isset($_GET['delet'])){
   $delete = $_GET['delet'];
   $delet = $objectSiswa->delete_data_guru($_GET['delet']);
   header('Refresh:0; url=data-guru.php');
 }
+
 ?>
 
 <!-- Page Heading -->
@@ -42,7 +44,8 @@ if(isset($_GET['delet'])){
           <tbody>
             <?php
 
-            while($row = $guru->fetch(PDO::FETCH_OBJ)){
+            while($row = $guru_map->fetch(PDO::FETCH_OBJ)){
+
               echo "
               <tr>
                 <td>$row->id_guru</td>
@@ -93,7 +96,7 @@ if(isset($_GET['delet'])){
                           </tr>
                           <tr>
                             <th>MATA PELAJARAN</th>
-                            <td>Matematika</td><br>
+                            <td>".$row->nama_mapel."</td>
                           </tr>
                         </table>
                         </div>

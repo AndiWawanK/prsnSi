@@ -98,13 +98,8 @@
                 </div> <!-- ./categori jurusan -->
                 <div class="btn-group"> <!-- categori jurusan -->
                   <select class="form-control" name="semester">
-                    <option>Semester:</option>
-                    <option value="semester 1">semester 1</option>
-                    <option value="semester 2">semester 2</option>
-                    <option value="semester 3">semester 3</option>
-                    <option value="semester 4">semester 4</option>
-                    <option value="semester 5">semester 5</option>
-                    <option value="semester 6">semester 6</option>
+                    <option>Mata Pelajaran</option>
+                    
                   </select>
                 </div> <!-- ./categori jurusan -->
                 <div class="btn-group">

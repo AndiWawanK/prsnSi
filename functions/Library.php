@@ -160,6 +160,15 @@
       $query  = $this->db->query($sql);
       return $query;
     }
+    //data guru beserta mata pelajarannya
+    public function guru_mapel(){
+      $sql    = "SELECT DISTINCT guru.nip , guru.nama , guru.tanggal_lahir , guru.pangkat , guru.status , guru.pendidikan , guru.foto_profile , mapel_guru.id_guru , mapel_guru.id_mapel , mapel.nama_mapel
+                 FROM mapel_guru
+                 INNER JOIN mapel ON mapel_guru.id_mapel = mapel.id_mapel
+                 INNER JOIN guru ON mapel_guru.id_guru = guru.id_guru GROUP BY id_guru";
+      $query  = $this->db->query($sql);
+      return $query;
+    }
     //tambah data guru
     public function tambah_guru($nip,$nama,$tanggal_lahir,$pangkat,$status,$pendidikan,$foto_profile){
       $sql    = "INSERT INTO guru (nip,nama,tanggal_lahir,pangkat,status,pendidikan,foto_profile)
