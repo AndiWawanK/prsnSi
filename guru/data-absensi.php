@@ -87,9 +87,7 @@ if(isset($_GET['lihat'])){
                        <td>
 
                            <a href='' class='btn btn-danger btn-xs'><i class='fa fa-cloud-download'></i> Download</a>
-                           <button type='submit' class='btn btn-info btn-xs' name='lihat' data-toggle='modal' data-target='#myModal1'><i class='fa fa-eye'></i> View</button>
-                           <input type='hidden' name='kelas' value='$row->kelas'>
-                           <input type='hidden' name='jurusan' value='$row->jurusan'>
+                           <button data-toggle='modal' data-target='#myModal1' type='submit' class='btn btn-info btn-xs' name='lihat'  onclick='absen(\"".$row->kelas."\",\"".$row->jurusan."\",\"".$row->tanggal."\")'><i class='fa fa-eye'></i> View</button>
 
                      ";
                    }
@@ -142,7 +140,7 @@ if(isset($_GET['lihat'])){
         <h4 class='modal-title' id='myModalLabel'>View Presensi</h4>
       </div>
       <div class='modal-body'>
-
+          <h3 id="status"></h3>
           <div class='table table-responsive'>
             <table class='table table-bordered'>
               <thead>
@@ -155,20 +153,9 @@ if(isset($_GET['lihat'])){
                   <th>KETERANGAN:</th>
                 </tr>
               </thead>
-              <?php
-              while($det = $view->fetch(PDO::FETCH_OBJ)){
-                echo "
-                <tr>
-                  <td>$det->nis</td>
-                  <td>$det->nama</td>
-                  <td>$det->kelas</td>
-                  <td>$det->jurusan</td>
-                  <td>$det->tanggal</td>
-                  <td>$det->keterangan</td>
-                </tr>
-                ";
-              }
-              ?>
+              <tbody id='bodyTabel'>
+      
+              </tbody>
             </table>
           </div>
 
@@ -182,6 +169,7 @@ if(isset($_GET['lihat'])){
 </div>
 </td>
 </tr>
+
 
 
 <?php require_once "../template/footer.php" ?>
