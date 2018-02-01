@@ -64,6 +64,23 @@ function fileValidation(){
     }
 }
 
+function absen(kelas,jurusan,tanggal) {
+  $('#status').html('loading...');
+  $.post("absen.php",{kelas:kelas,jurusan:jurusan,tanggal:tanggal},function(res) {
+    $('#status').html('');
+    var data = JSON.parse(res);
+    var tabelData = "";
+    data.forEach(function(dat) {
+      tabelData += "<tr><td>"+dat.nis+"</td><td>"+dat.nama+"</td><td>"+dat.kelas+"</td><td>"+dat.jurusan+"</td><td>"+dat.tanggal+"</td><td>"+dat.keterangan+"</td></tr>";
+    });
+    console.log(tabelData);
+    $('#bodyTabel').html(tabelData);
+  })
+  console.log(kelas);
+  console.log(jurusan);
+  console.log(tanggal);
+}
+
 
 </script>
 </body>

@@ -3,7 +3,7 @@
   class Library{
 
     public function __construct(){
-      $this->db = new PDO('mysql:host=localhost;dbname=absensiSiswa;','root','root');
+      $this->db = new PDO('mysql:host=localhost;dbname=absensiSiswa;','root','');
     }
 
     //menampilkan seluruh data dari database
@@ -86,6 +86,13 @@
         }else{
           return "True";
         }
+    }
+
+    public function absenByTanggal($kelas,$tanggal,$jurusan)
+    {
+      $sql = "SELECT * FROM `siswa` INNER JOIN keterangan ON siswa.id_siswa=keterangan.id_siswa WHERE siswa.kelas='$kelas' AND siswa.jurusan='$jurusan' AND keterangan.tanggal='$tanggal'";
+      $query = $this->db->query($sql);
+      return $query;
     }
 
     //update data siswa
