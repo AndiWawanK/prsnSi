@@ -15,6 +15,7 @@ $cekLogin = $objectSiswa->cekLogin($guru);
 while($row = $cekLogin->fetch(PDO::FETCH_OBJ)){
   $user[] = $row->level;
   $nama[] = $row->nama_lengkap;
+  $foto[] = $row->foto_profile;
 }
 
  ?>
@@ -60,7 +61,7 @@ while($row = $cekLogin->fetch(PDO::FETCH_OBJ)){
           <ul class="nav navbar-right top-nav">
               <li class="dropdown">
                   <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>&nbsp; <b class="caret"></b></a> -->
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="../assets/profile/people.png" class="profile"></i>&nbsp; <?php echo $nama[0]; ?> <b class="caret"></b></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="../assets/profile/<?php echo $foto[0] ?>"></i>&nbsp; <?php echo $nama[0]; ?> <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li><a href="setting.php"><i class="fa fa-fw fa-gear"></i> Settings</a></li>
                     <li><a href="../template/logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a></li>

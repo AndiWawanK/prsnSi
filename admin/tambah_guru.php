@@ -12,6 +12,7 @@ $tampil_mapel = $objectSiswa->tampil_mapel();
     $nip    = htmlspecialchars($_POST['nip']);
     $nama   = htmlspecialchars($_POST['nama']);
     $tanggal_lahir  = htmlspecialchars($_POST['date']);
+    $gender = htmlspecialchars($_POST['gender']);
     $pangkat = htmlspecialchars($_POST['pangkat']);
     $status  = htmlspecialchars($_POST['status']);
     $pendidikan = htmlspecialchars($_POST['pendidikan']);
@@ -34,7 +35,7 @@ $tampil_mapel = $objectSiswa->tampil_mapel();
     }
     move_uploaded_file($tmp_name,"../assets/profile/".$foto_profile);
 
-    $tambah_guru = $objectSiswa->tambah_guru($nip,$nama,$tanggal_lahir,$pangkat,$status,$pendidikan,$foto_profile);
+    $tambah_guru = $objectSiswa->tambah_guru($nip,$nama,$tanggal_lahir,$gender,$pangkat,$status,$pendidikan,$foto_profile);
       if($tambah_guru == "True"){
         $success = "Data berhasil ditambahkan";
       }else{
@@ -58,7 +59,7 @@ $tampil_mapel = $objectSiswa->tampil_mapel();
       }else{
         $wali = 'T';
       }
-      $objectSiswa->tambah_user($nama,$nip,preg_replace("/[^a-zA-Z0-9]/","",$tanggal_lahir),$wali);
+      $objectSiswa->tambah_user($nama,$nip,preg_replace("/[^a-zA-Z0-9]/","",$tanggal_lahir),$wali,$foto_profile);
 
   }
 
@@ -108,6 +109,13 @@ $tampil_mapel = $objectSiswa->tampil_mapel();
              </div>
              <input type="text" name="date" class="form-control" id="date" placeholder="Tanggal Lahir / MM/DD/YYYY">
             </div>
+          </div>
+          <div class="form-group">
+            <select class="form-control" name="gender">
+              <option>Jenis Kelamin</option>
+              <option value="laki-laki">Laki-Laki</option>
+              <option value="perempuan">Perempuan</option>
+            </select>
           </div>
           <div class="form-group">
             <input type="text" name="pangkat" class="form-control" placeholder="Pangkat">

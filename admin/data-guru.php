@@ -35,6 +35,7 @@ if(isset($_GET['delet'])){
               <th>NIP</th>
               <th>NAMA</th>
               <th>TANGGAL LAHIR</th>
+              <th>JENIS KELAMIN</th>
               <th>PANGKAT</th>
               <th>STATUS</th>
               <th>PENDIDIKAN</th>
@@ -52,6 +53,7 @@ if(isset($_GET['delet'])){
                 <td>$row->nip</td>
                 <td>$row->nama</td>
                 <td>$row->tanggal_lahir</td>
+                <td>$row->jenis_kelamin</td>
                 <td>$row->pangkat</td>
                 <td>$row->status</td>
                 <td>$row->pendidikan</td>

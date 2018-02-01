@@ -142,6 +142,16 @@
       // $cek = $query->fetch();
       return $query;
     }
+    //cek mata pelajaran guru ketika login
+    public function cek_mapel_guru($nip){
+      $sql   = "SELECT guru.nama , mapel.nama_mapel , mapel_guru.id_guru
+                FROM guru
+                INNER JOIN mapel_guru ON guru.id_guru = mapel_guru.id_guru
+                INNER JOIN mapel ON mapel_guru.id_mapel = mapel.id_mapel
+                WHERE guru.nip = '$nip'";
+      $query = $this->db->query($sql);
+      return $query;
+    }
 
     //change password guru/siswa
     public function updatePass($id_user,$password){
@@ -162,7 +172,7 @@
     }
     //data guru beserta mata pelajarannya
     public function guru_mapel(){
-      $sql    = "SELECT DISTINCT guru.nip , guru.nama , guru.tanggal_lahir , guru.pangkat , guru.status , guru.pendidikan , guru.foto_profile , mapel_guru.id_guru , mapel_guru.id_mapel , mapel.nama_mapel
+      $sql    = "SELECT DISTINCT guru.nip , guru.nama , guru.tanggal_lahir , guru.jenis_kelamin , guru.pangkat , guru.status , guru.pendidikan , guru.foto_profile , mapel_guru.id_guru , mapel_guru.id_mapel , mapel.nama_mapel
                  FROM mapel_guru
                  INNER JOIN mapel ON mapel_guru.id_mapel = mapel.id_mapel
                  INNER JOIN guru ON mapel_guru.id_guru = guru.id_guru GROUP BY id_guru";
@@ -170,9 +180,9 @@
       return $query;
     }
     //tambah data guru
-    public function tambah_guru($nip,$nama,$tanggal_lahir,$pangkat,$status,$pendidikan,$foto_profile){
-      $sql    = "INSERT INTO guru (nip,nama,tanggal_lahir,pangkat,status,pendidikan,foto_profile)
-                 VALUES ('$nip','$nama','$tanggal_lahir','$pangkat','$status','$pendidikan','$foto_profile')";
+    public function tambah_guru($nip,$nama,$tanggal_lahir,$gender,$pangkat,$status,$pendidikan,$foto_profile){
+      $sql    = "INSERT INTO guru (nip,nama,tanggal_lahir,jenis_kelamin,pangkat,status,pendidikan,foto_profile)
+                 VALUES ('$nip','$nama','$tanggal_lahir','$gender','$pangkat','$status','$pendidikan','$foto_profile')";
       $query  = $this->db->query($sql);
         if(!$query){
           return "False";
@@ -182,8 +192,8 @@
       }
 
       //tambah user
-      public function tambah_user($nama_lengkap,$username,$password,$wali){
-        $sql   = "INSERT INTO users VALUES ('','$nama_lengkap','$username','$password','guru','$wali')";
+      public function tambah_user($nama_lengkap,$username,$password,$wali,$foto_profile){
+        $sql   = "INSERT INTO users VALUES ('','$nama_lengkap','$username','$password','guru','$wali','$foto_profile')";
         $query = $this->db->query($sql);
         if(!$query){
           return "False";
@@ -259,7 +269,7 @@
     }
     //delete data guru
     public function delete_data_guru($id_guru){
-      $sql   = "DELETE FROM guru WHERE id_guru='$id_guru' ";
+      $sql   = "DELETE FROM guru WHERE id_guru='$id_guru'";
       $query = $this->db->query($sql);
       return $query;
     }
@@ -269,5 +279,6 @@
       $query  = $this->db->query($sql);
       return $query;
     }
+
 }
  ?>
