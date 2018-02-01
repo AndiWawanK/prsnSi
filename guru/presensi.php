@@ -50,12 +50,12 @@
         $error1 = "Anda Harus Mengisi Keterangan Absensi!";
       }
    }
-
   $cek_mapel = $objectSiswa->cek_mapel_guru($guru);
   // while($mapel = $cek_mapel->fetch(PDO::FETCH_OBJ)){
   //   $nama[] = $mapel->nama;
   //   $nama_mapel[] = $mapel->nama_mapel;
   // }
+
 
  ?>
 

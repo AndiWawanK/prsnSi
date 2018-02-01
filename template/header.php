@@ -12,6 +12,8 @@ $objectSiswa = new Library();
 
 $cekLogin = $objectSiswa->cekLogin($guru);
 
+
+
 while($row = $cekLogin->fetch(PDO::FETCH_OBJ)){
   $user[] = $row->level;
   $wali[] = $row->wali;
@@ -68,7 +70,7 @@ while($row = $cekLogin->fetch(PDO::FETCH_OBJ)){
                     <li><a href="../template/logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a></li>
                     <?php if($wali[0] == 'Y'){ ?>
                       <li class="divider"></li>
-                      <li><a href="../wali?wali"><i class="fa fa-fw fa-arrow-right"></i> Pantau Kelas</a></li>
+                      <li><a href="../wali"><i class="fa fa-fw fa-arrow-right"></i> Pantau Kelas</a></li>
                     <?php } ?>
                   </ul>
               </li>
@@ -78,16 +80,14 @@ while($row = $cekLogin->fetch(PDO::FETCH_OBJ)){
           <!-- Menu Sidebar -->
           <div class="collapse navbar-collapse navbar-ex1-collapse">
               <ul class="nav navbar-nav side-nav">
-              <?php if(isset($_GET['wali'])){ ?>
-                <?php if($wali[0] == 'Y'){ ?>
-                  <li><a href="#" class="toggle-custom" id="btn-1" data-toggle="collapse" data-target="#datasiswa" aria-expanded="false"><span class="fa fa-tw fa-graduation-cap" aria-hidden="true"></span> Data Siswa</a>
+
+                  <!-- <li><a href="#" class="toggle-custom" id="btn-1" data-toggle="collapse" data-target="#datasiswa" aria-expanded="false"><span class="fa fa-tw fa-graduation-cap" aria-hidden="true"></span> Data Siswa</a>
                     <ul class="nav collapse" id="datasiswa" role="menu" aria-labelledby="btn-1">
-                      <li><a href="data-siswa.php"><i class="fa fa-database"></i> Data Siswa</a></li>
+                      <li><a href="data-absensi.php"><i class="fa fa-database"></i> Data Siswa</a></li>
                       <li><a href="update-data.php"><i class="fa fa-plus"></i> Tambah</a></li>
                     </ul>
-                  </li>
-                <?php } ?>
-              <?php }else{ ?>
+                  </li> -->
+
               <?php if($user[0] == 'guru'){ ?>
                 <li><a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
                 <li><a href="presensi.php"><i class="fa fa-fw fa fa-hospital-o"></i> Prensesi</a></li>
@@ -110,7 +110,7 @@ while($row = $cekLogin->fetch(PDO::FETCH_OBJ)){
                 </li>
                 <li><a href="tambah_mapel.php"><i class="fa fa-book"></i> Mata Pelajaran</a></li>
               <?php } ?>
-              <?php } ?>
+
               </ul>
           </div>
           <!-- Menu Sidebar -->

@@ -21,13 +21,14 @@ if(isset($_POST['login'])){
 
   while($row = $cekLogin->fetch(PDO::FETCH_OBJ)){
     $user[] = $row->level;
+    $wali[] = $row->wali;
   }
-
   if($login != "False"){
 
      if($user[0] == 'guru'){
        $_SESSION['username'] = $username;
-        $_SESSION['status'] = 'guru';
+       $_SESSION['status'] = 'guru';
+       $_SESSION['wali'] = 'Y';
         header('location: guru/');
       }else if($user[0] == 'admin'){
         $_SESSION['username'] = $username;
