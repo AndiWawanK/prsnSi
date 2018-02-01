@@ -14,6 +14,7 @@ $cekLogin = $objectSiswa->cekLogin($guru);
 
 while($row = $cekLogin->fetch(PDO::FETCH_OBJ)){
   $user[] = $row->level;
+  $wali[] = $row->wali;
   $nama[] = $row->nama_lengkap;
   $foto[] = $row->foto_profile;
 }
@@ -65,7 +66,10 @@ while($row = $cekLogin->fetch(PDO::FETCH_OBJ)){
                   <ul class="dropdown-menu">
                     <li><a href="setting.php"><i class="fa fa-fw fa-gear"></i> Settings</a></li>
                     <li><a href="../template/logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a></li>
-                    <!-- <li class="divider"></li> -->
+                    <?php if($wali[0] == 'Y'){ ?>
+                      <li class="divider"></li>
+                      <li><a href="../wali?wali"><i class="fa fa-fw fa-arrow-right"></i> Pantau Kelas</a></li>
+                    <?php } ?>
                   </ul>
               </li>
           </ul>
@@ -74,12 +78,21 @@ while($row = $cekLogin->fetch(PDO::FETCH_OBJ)){
           <!-- Menu Sidebar -->
           <div class="collapse navbar-collapse navbar-ex1-collapse">
               <ul class="nav navbar-nav side-nav">
-
+              <?php if(isset($_GET['wali'])){ ?>
+                <?php if($wali[0] == 'Y'){ ?>
+                  <li><a href="#" class="toggle-custom" id="btn-1" data-toggle="collapse" data-target="#datasiswa" aria-expanded="false"><span class="fa fa-tw fa-graduation-cap" aria-hidden="true"></span> Data Siswa</a>
+                    <ul class="nav collapse" id="datasiswa" role="menu" aria-labelledby="btn-1">
+                      <li><a href="data-siswa.php"><i class="fa fa-database"></i> Data Siswa</a></li>
+                      <li><a href="update-data.php"><i class="fa fa-plus"></i> Tambah</a></li>
+                    </ul>
+                  </li>
+                <?php } ?>
+              <?php }else{ ?>
               <?php if($user[0] == 'guru'){ ?>
                 <li><a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
                 <li><a href="presensi.php"><i class="fa fa-fw fa fa-hospital-o"></i> Prensesi</a></li>
                 <li><a href="data-absensi.php"><i class="fa fa-fw fa-table"></i> Rekap Absensi</a></li>
-                <li><a href="update-data.php"><i class="fa fa-fw fa-edit"></i> Update Data Siswa</a></li>
+                <!-- <li><a href="update-data.php"><i class="fa fa-fw fa-edit"></i> Update Data Siswa</a></li> -->
 
               <?php }else if($user[0] == 'admin'){ ?>
                 <li><a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
@@ -96,8 +109,7 @@ while($row = $cekLogin->fetch(PDO::FETCH_OBJ)){
                   </ul>
                 </li>
                 <li><a href="tambah_mapel.php"><i class="fa fa-book"></i> Mata Pelajaran</a></li>
-
-              <?php }else{ ?>
+              <?php } ?>
               <?php } ?>
               </ul>
           </div>

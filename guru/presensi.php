@@ -51,6 +51,11 @@
       }
    }
 
+  $cek_mapel = $objectSiswa->cek_mapel_guru($guru);
+  // while($mapel = $cek_mapel->fetch(PDO::FETCH_OBJ)){
+  //   $nama[] = $mapel->nama;
+  //   $nama_mapel[] = $mapel->nama_mapel;
+  // }
 
  ?>
 
@@ -99,7 +104,9 @@
                 <div class="btn-group"> <!-- categori jurusan -->
                   <select class="form-control" name="semester">
                     <option>Mata Pelajaran</option>
-                    
+                    <?php while($mapel = $cek_mapel->fetch(PDO::FETCH_OBJ)){ ?>
+                        <option value=""><?php echo $mapel->nama_mapel; ?></option>
+                    <?php } ?>
                   </select>
                 </div> <!-- ./categori jurusan -->
                 <div class="btn-group">

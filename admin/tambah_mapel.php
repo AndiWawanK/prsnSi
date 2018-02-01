@@ -59,7 +59,7 @@ if(isset($_GET['delete'])){
               while($row = $tampil->fetch(PDO::FETCH_OBJ)){
                 echo "
                 <tr>
-                  <td>$row->nama</td>
+                  <td>$row->nama_mapel</td>
                   <td class='action-mapel'>
                   <button type='submit' class='btn btn-info btn-xs'><i class='fa fa-pencil'></i> Edit</button>
                   <a href='?delete=$row->id_mapel' type='submit' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i> Delete</a>
