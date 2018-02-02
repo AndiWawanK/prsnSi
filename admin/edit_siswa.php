@@ -127,7 +127,7 @@ if(isset($_POST['update'])){
                 </select>
               </div>
               <div class="form-group">
-                <button type="submit" class="btn btn-success buton-presensi" name="update"><span class="fa fa-plus"></span> Tambah Siswa</button>
+                <button type="submit" class="btn btn-success buton-presensi" name="update"><span class="fa fa-plus"></span> Update Siswa</button>
               </div>
             </form>
           </div>

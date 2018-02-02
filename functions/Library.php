@@ -293,6 +293,12 @@
       $query = $this->db->query($sql);
       return $query;
     }
+    //delete data siswa
+    public function delete_siswa($id_siswa){
+      $sql   = "DELETE * FROM siswa WHERE id_siswa='$id_siswa'";
+      $query = $this->db->query($sql);
+      return $query;
+    }
     //edit data guru
     public function edit_guru($id_guru){
       $sql    = "SELECT * FROM guru WHERE id_guru = '$id_guru' ";
@@ -306,5 +312,20 @@
       $query  = $this->db->query($sql);
       return $query;
     }
+
+    //ceklis Download
+    public function download_presensi($id_prsensi){
+      $sql    = "SELECT * FROM siswa.kelas , siswa.jurusan ,keterangan.tanggal
+                 FROM siswa
+                 INNER JOIN keterangan
+                 ON siswa.id_siswa = keterangan.id_siswa WHERE siswa.id_siswa = '$id_siswa' ";
+      $query  = $this->db->query($sql);
+      if(!$query){
+        return "False";
+      }else{
+        return "True";
+      }
+    }
+
 }
  ?>

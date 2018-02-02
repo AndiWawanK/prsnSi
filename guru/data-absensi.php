@@ -87,6 +87,9 @@ if(isset($_GET['delet'])){
                     <th>Jurusan:</th>
                     <th>Tanggal Presensi:</th>
                     <th>Download Presensi:</th>
+                    <th>Checklis All
+                      <input type="checkbox" name="select-all" id="select-all">
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -103,7 +106,11 @@ if(isset($_GET['delet'])){
 
                            <a href='' class='btn btn-warning btn-xs'><i class='fa fa-cloud-download'></i> Download</a>
                            <button data-toggle='modal' data-target='#myModal1' type='submit' class='btn btn-info btn-xs' name='lihat'  onclick='absen(\"".$row->kelas."\",\"".$row->jurusan."\",\"".$row->tanggal."\")'><i class='fa fa-eye'></i> View</button>
-                           <a href='?delet=$row->id_tanggal' type='submit' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i> Delete</button>
+                           <a href='?delet=$row->id_tanggal' type='submit' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i> Delete</a>
+                       </td>
+                       <td>
+                          <input type='checkbox' name='checkbox-1'>
+                       </td>
                      ";
                    }
                 ?>
@@ -183,7 +190,23 @@ if(isset($_GET['delet'])){
 </div>
 </td>
 </tr>
+<script type="text/javascript">
 
+
+    $('#select-all').click(function(event){
+      if(this.checked){
+        $(':checkbox').each(function(){
+          this.checked = true;
+        });
+      }else{
+        $(':checkbox').each(function(){
+          this.checked = false;
+        });
+      }
+    });
+
+
+</script>
 
 
 <?php require_once "../template/footer.php" ?>

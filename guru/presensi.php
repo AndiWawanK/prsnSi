@@ -25,7 +25,6 @@
    // }
 
 }
-
    //proses jika presensi telah selesai
    if(isset($_POST['absen'])){
      //cek apakah keterangan presensi selesai di input
@@ -41,6 +40,8 @@
 
         if(!empty($keterangan) && !empty($tanggal)){
          $ket  = $objectSiswa->keterangan($id_siswa,$keterangan,$tanggal);
+
+         var_dump($ket);
          if($ket == "Success"){
            $error = "Presensi Berhasil !";
          }else{

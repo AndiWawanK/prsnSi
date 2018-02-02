@@ -14,7 +14,12 @@ if(isset($_POST['cari'])){
 }
 $sub = $objectSiswa->tampil_sub_jurusan($_GET['jurusan']);
 
-// var_dump($sub_jur[1]);
+if(isset($_GET['delet'])){
+  $delt = $_GET['delet'];
+  $delete  = $objectSiswa->delete_siswa($_GET['delet']);
+  // header('Refresh:0; url=tampil_kelas.php');
+  var_dump($delt);
+}
 ?>
 
 <!-- Page Heading -->
@@ -89,7 +94,7 @@ $sub = $objectSiswa->tampil_sub_jurusan($_GET['jurusan']);
                         <td>$row->jurusan</td>
                         <td>
                           <a href='edit_siswa.php?id=$row->id_siswa' class='btn btn-info btn-xs'><i class='fa fa-pencil'></i> Edit</a>
-                          <button class='btn btn-danger btn-xs'><i class='fa fa-trash'></i> Delete</button>
+                          <a href='?delet=$row->id_siswa' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i> Delete</a>
                         </td>
                       </tr>
                     ";
