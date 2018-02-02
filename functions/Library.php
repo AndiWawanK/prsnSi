@@ -295,7 +295,7 @@
     }
     //delete data siswa
     public function delete_siswa($id_siswa){
-      $sql   = "DELETE * FROM siswa WHERE id_siswa='$id_siswa'";
+      $sql   = "DELETE FROM siswa WHERE id_siswa='$id_siswa'";
       $query = $this->db->query($sql);
       return $query;
     }

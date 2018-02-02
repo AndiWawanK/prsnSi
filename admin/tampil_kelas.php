@@ -12,13 +12,14 @@ if(isset($_POST['cari'])){
     $siswa = $objectSiswa->cari($kelas,$jurusan);
   }
 }
-$sub = $objectSiswa->tampil_sub_jurusan($_GET['jurusan']);
+  $jur = $_GET['jurusan'];
+  $sub = $objectSiswa->tampil_sub_jurusan($jur);
+
 
 if(isset($_GET['delet'])){
   $delt = $_GET['delet'];
-  $delete  = $objectSiswa->delete_siswa($_GET['delet']);
-  // header('Refresh:0; url=tampil_kelas.php');
-  var_dump($delt);
+  $delete  = $objectSiswa->delete_siswa($delt);
+  header('location: data-siswa.php');
 }
 ?>
 
@@ -94,7 +95,7 @@ if(isset($_GET['delet'])){
                         <td>$row->jurusan</td>
                         <td>
                           <a href='edit_siswa.php?id=$row->id_siswa' class='btn btn-info btn-xs'><i class='fa fa-pencil'></i> Edit</a>
-                          <a href='?delet=$row->id_siswa' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i> Delete</a>
+                          <a href='?delet=$row->id_siswa' type='submit' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i> Delete</a>
                         </td>
                       </tr>
                     ";

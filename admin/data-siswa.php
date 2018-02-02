@@ -8,7 +8,6 @@ if(isset($_GET['jurusan'])){
   $sub = $_GET['jurusan'];
   // tampil_sub_jurusan($_GET['jurusan']);
 
-
 }
 
 ?>
