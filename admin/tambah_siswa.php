@@ -8,12 +8,16 @@ $berhasil = "";
   if(isset($_POST["tambah"])){
     $nis      = htmlspecialchars($_POST["nis"]);
     $nama     = htmlspecialchars($_POST["nama"]);
+    $jenis_kel = $_POST['jenis_kelamin'];
+    $alamat   = htmlspecialchars($_POST['alamat']);
+    $tanggal_lahir = htmlspecialchars($_POST['date']);
     $kelas    = $_POST["kelas"];
     $jurusan  = $_POST["jurusan"];
     $semester = $_POST["semester"];
 
         if(!empty(trim($nis)) && !empty(trim($nama)) && !empty($kelas) && !empty($jurusan) && !empty($semester)){
-          $tambah = $objectSiswa->tambahSiswa($nis,$nama,$kelas,$jurusan,$semester);
+          $tambah = $objectSiswa->tambahSiswa($nis,$nama,$jenis_kel,$alamat,$tanggal_lahir,$kelas,$jurusan,$semester);
+          var_dump($tambah);
             if($tambah == "True"){
               $berhasil  = "Data Berhasil Di Tambahkan";
             }else{
@@ -64,6 +68,24 @@ $berhasil = "";
             </div>
             <div class="form-group">
               <input type="text" name="nis" class="form-control" placeholder="No Induk Siswa">
+            </div>
+            <div class="form-group">
+              <select class="form-control" name="jenis_kelamin">
+                <option>Jenis Kelamin</option>
+                <option value="Laki-Laki">Laki-Laki</option>
+                <option value="Perempuan">Perempuan</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <textarea name="alamat" class="form-control" placeholder="Alamat Lengkap"></textarea>
+            </div>
+            <div class="form-group tanggal-lahir">
+              <div class="input-group">
+               <div class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+               </div>
+               <input type="text" name="date" class="form-control" id="date" placeholder="Tanggal Lahir / MM/DD/YYYY">
+              </div>
             </div>
             <div class="form-group">
               <select class="form-control" name="kelas">

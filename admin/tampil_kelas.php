@@ -48,7 +48,6 @@ $sub = $objectSiswa->tampil_sub_jurusan($_GET['jurusan']);
               <select class="form-control" name="jurusan">
                 <option>Sub-Jurusan</option>
 
-
                 <?php while($row = $sub->fetch()){ ?>
                    <option value="<?php echo $sub_jur = $row[0] ?>"><?php echo $sub_jur = $row[0] ?></option>
                 <?php } ?>
@@ -67,6 +66,9 @@ $sub = $objectSiswa->tampil_sub_jurusan($_GET['jurusan']);
                 <tr>
                   <th>NIS</th>
                   <th>NAMA</th>
+                  <th>JENIS KELAMIN</th>
+                  <th>ALAMAT</th>
+                  <th>TANGGAL LAHIR</th>
                   <th>KELAS</th>
                   <th>JURUSAN</th>
                   <th>ACTION</th>
@@ -80,10 +82,13 @@ $sub = $objectSiswa->tampil_sub_jurusan($_GET['jurusan']);
                       <tr>
                         <td>$row->nis</td>
                         <td>$row->nama</td>
+                        <td>$row->jenis_kelamin</td>
+                        <td>$row->alamat</td>
+                        <td>$row->tanggal_lahir</td>
                         <td>$row->kelas</td>
                         <td>$row->jurusan</td>
                         <td>
-                          <button class='btn btn-info btn-xs'><i class='fa fa-pencil'></i> Edit</button>
+                          <a href='edit_siswa.php?id=$row->id_siswa' class='btn btn-info btn-xs'><i class='fa fa-pencil'></i> Edit</a>
                           <button class='btn btn-danger btn-xs'><i class='fa fa-trash'></i> Delete</button>
                         </td>
                       </tr>

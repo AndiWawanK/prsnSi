@@ -47,7 +47,7 @@ $tampil_mapel = $objectSiswa->tampil_mapel();
           <select multiple="multiple" id="my-select" name="my-select[]">
             <option disabled>Pilih Mata Pelajaran</option>
             <?php while($tampil = $tampil_mapel->fetch(PDO::FETCH_OBJ)){ ?>
-            <option value='<?php echo $tampil->id_mapel; ?>'><?php echo $tampil->nama; ?></option>
+            <option value='<?php echo $tampil->id_mapel; ?>'><?php echo $tampil->nama_mapel; ?></option>
             <?php } ?>
           </select>
         </div>

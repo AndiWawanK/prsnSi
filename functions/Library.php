@@ -3,7 +3,7 @@
   class Library{
 
     public function __construct(){
-      $this->db = new PDO('mysql:host=localhost;dbname=absensiSiswa;','root','');
+      $this->db = new PDO('mysql:host=localhost;dbname=absensiSiswa;','root','root');
     }
 
     //menampilkan seluruh data dari database
@@ -76,9 +76,9 @@
     }
 
     //tambah data siswa
-    public function tambahSiswa($nis,$nama,$kelas,$jurusan,$semester){
-      $sql    = "INSERT INTO siswa (nis,nama,kelas,jurusan,semester)
-                 VALUES ('$nis','$nama','$kelas','$jurusan','$semester')";
+    public function tambahSiswa($nis,$nama,$jenis_kel,$alamat,$tanggal_lahir,$kelas,$jurusan,$semester){
+      $sql    = "INSERT INTO siswa (nis,nama,jenis_kelamin,alamat,tanggal_lahir,kelas,jurusan,semester)
+                 VALUES ('$nis','$nama','$jenis_kel','$alamat','$tanggal_lahir','$kelas','$jurusan','$semester')";
       $query  = $this->db->query($sql);
 
         if(!$query){
@@ -96,8 +96,9 @@
     }
 
     //update data siswa
-    public function updateData($id_siswa,$nis,$nama,$kelas,$jurusan,$semester){
-      $sql    = "UPDATE siswa SET nis='$nis',nama='$nama',kelas='$kelas',
+    public function update_data_siswa($id_siswa,$nis,$nama,$jenis_kel,$alamat,$tanggal_lahir,$kelas,$jurusan,$semester){
+      $sql    = "UPDATE siswa SET nis='$nis',nama='$nama',
+                 jenis_kelamin='$jenis_kel',alamat='$alamat',tanggal_lahir='$tanggal_lahir',kelas='$kelas',
                  jurusan='$jurusan',semester='$semester' WHERE id_siswa='$id_siswa' ";
       $query  = $this->db->query($sql);
         if(!$query){
@@ -114,6 +115,18 @@
       return $query;
     }
 
+    //cari kelas dan jurusan (rekap)
+    public function cariKelasRekap($kelas,$jurusan){
+      $sql   = "SELECT * FROM jurusan WHERE kelas = '$kelas' AND jurusan = '$jurusan' ";
+      $query = $this->db->query($sql);
+      return $query;
+    }
+    //delete rekap absensi
+    public function deletPresensi($id_tanggal){
+      $sql   = "DELETE FROM jurusan WHERE id_tanggal ='$id_tanggal'";
+      $query = $this->db->query($sql);
+      return $query;
+    }
     // public function detailAbsen($jurusan,$id_siswa){
     //   $sql   = "SELECT siswa.nis , siswa.nama , siswa.kelas , siswa.jurusan , keterangan.keterangan
     //             FROM siswa INNER JOIN keterangan ON siswa.id_siswa = keterangan.id_siswa";
@@ -121,15 +134,15 @@
     //   return $query;
     // }
 
-    public function detailAbsen(){
-      $sql    = "SELECT siswa.nis , siswa.nama , siswa.kelas , jurusan.jurusan , keterangan.tanggal , keterangan.keterangan
-      FROM siswa
-      INNER JOIN jurusan
-      INNER JOIN keterangan ON siswa.id_siswa = keterangan.id_siswa
-      WHERE siswa.kelas = 'XII' AND jurusan.jurusan = 'TKJ 1'";
-      $query = $this->db->query($sql);
-      return $query;
-    }
+    // public function detailAbsen(){
+    //   $sql    = "SELECT siswa.nis , siswa.nama , siswa.kelas , jurusan.jurusan , keterangan.tanggal , keterangan.keterangan
+    //   FROM siswa
+    //   INNER JOIN jurusan
+    //   INNER JOIN keterangan ON siswa.id_siswa = keterangan.id_siswa
+    //   WHERE siswa.kelas = 'XII' AND jurusan.jurusan = 'TKJ 1'";
+    //   $query = $this->db->query($sql);
+    //   return $query;
+    // }
 
     //login
     public function login($username,$password){
@@ -287,5 +300,11 @@
       return $query;
     }
 
+    //edit data siswa
+    public function edit_siswa($id_siswa){
+      $sql    = "SELECT * FROM siswa WHERE id_siswa = '$id_siswa'";
+      $query  = $this->db->query($sql);
+      return $query;
+    }
 }
  ?>
