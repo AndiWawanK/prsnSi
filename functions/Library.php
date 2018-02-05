@@ -90,7 +90,7 @@
 
     public function absenByTanggal($kelas,$tanggal,$jurusan)
     {
-      $sql = "SELECT * FROM `siswa` INNER JOIN keterangan ON siswa.id_siswa=keterangan.id_siswa WHERE siswa.kelas='$kelas' AND siswa.jurusan='$jurusan' AND keterangan.tanggal='$tanggal'";
+      $sql = "SELECT * FROM `siswa` INNER JOIN keterangan ON siswa.id_siswa=keterangan.id_siswa WHERE siswa.kelas ='$kelas' AND siswa.jurusan = '$jurusan' AND keterangan.tanggal='$tanggal'";
       $query = $this->db->query($sql);
       return $query;
     }
@@ -313,19 +313,7 @@
       return $query;
     }
 
-    //ceklis Download
-    public function download_presensi($id_prsensi){
-      $sql    = "SELECT * FROM siswa.kelas , siswa.jurusan ,keterangan.tanggal
-                 FROM siswa
-                 INNER JOIN keterangan
-                 ON siswa.id_siswa = keterangan.id_siswa WHERE siswa.id_siswa = '$id_siswa' ";
-      $query  = $this->db->query($sql);
-      if(!$query){
-        return "False";
-      }else{
-        return "True";
-      }
-    }
+
 
 }
  ?>

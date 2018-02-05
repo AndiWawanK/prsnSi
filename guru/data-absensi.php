@@ -9,12 +9,12 @@ if($_SESSION['status'] !== 'guru'){
 
 $data = $objectSiswa->listAbsensi();
 
-if(isset($_GET['lihat'])){
-    // $kelas = $_POST['kelas'];
-    // $jurusan = $_POST['jurusan'];
-    $view = $objectSiswa->detailAbsen($kelas,$jurusan);
-    echo "true";
-}
+// if(isset($_GET['lihat'])){
+//     // $kelas = $_POST['kelas'];
+//     // $jurusan = $_POST['jurusan'];
+//     $view = $objectSiswa->detailAbsen($kelas,$jurusan);
+//     echo "true";
+// }
 
 if(isset($_POST["cari"])){
   $kelas = $_POST["kelas"];
@@ -27,7 +27,10 @@ if(isset($_GET['delet'])){
   $del = $objectSiswa->deletPresensi($delt);
   header('Refresh:0; url=data-absensi.php');
 }
-
+// if(isset($_GET['download'])){
+//   header("Content-type: application/vnd-ms-excel");
+//   header("Content-Disposition: attachment; filename=hasil.xls");
+// }
 ?>
 
 <!-- Page Heading -->
@@ -78,6 +81,7 @@ if(isset($_GET['delet'])){
               </div>
             </form>
           </div>
+
           <div class="panel-body">
             <div class="table-responsive">
               <table class="table table-striped">
@@ -96,6 +100,8 @@ if(isset($_GET['delet'])){
 
 
               <?php
+
+
                 while($row = $data->fetch(PDO::FETCH_OBJ)){
                     echo "
                      <tr>
@@ -104,8 +110,9 @@ if(isset($_GET['delet'])){
                        <td>$row->tanggal</td>
                        <td>
 
-                           <a href='' class='btn btn-warning btn-xs'><i class='fa fa-cloud-download'></i> Download</a>
-                           <button data-toggle='modal' data-target='#myModal1' type='submit' class='btn btn-info btn-xs' name='lihat'  onclick='absen(\"".$row->kelas."\",\"".$row->jurusan."\",\"".$row->tanggal."\")'><i class='fa fa-eye'></i> View</button>
+                           <a href='download.php?download=$row->id_tanggal' onclick='absen(\"".$row->kelas."\",\"".$row->jurusan."\",\"".$row->tanggal."\")' class='btn btn-warning btn-xs'><i class='fa fa-cloud-download'></i> Download</a>
+
+                           <button data-toggle='modal' data-target='#myModal1' class='btn btn-info btn-xs' name='lihat' onclick='absen(\"".$row->kelas."\",\"".$row->jurusan."\",\"".$row->tanggal."\")'><i class='fa fa-eye'></i> View</button>
                            <a href='?delet=$row->id_tanggal' type='submit' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i> Delete</a>
                        </td>
                        <td>
@@ -164,7 +171,7 @@ if(isset($_GET['delet'])){
       <div class='modal-body'>
           <h3 id="status"></h3>
           <div class='table table-responsive'>
-            <table class='table table-bordered'>
+            <table class='table table-bordered' id="employee_table">
               <thead>
                 <tr>
                   <th>NIS:</th>
@@ -183,14 +190,20 @@ if(isset($_GET['delet'])){
 
       </div>
       <div class='modal-footer foter-absen'>
+        <!-- <form action="download.php" method="post"> -->
+          <button type="submit" name="create_excel" id="create_excel" class="btn btn-danger buton-presensi"><i class="fa fa-cloud-download"></i> Download</button>
+        <!-- </form> -->
         <button type='button' class='btn btn-primary buton-presensi' data-dismiss='modal'><i class='fa fa-times'></i> Close</button>
       </div>
     </div>
   </div>
 </div>
+
+
 </td>
 </tr>
 <script type="text/javascript">
+
 
 
     $('#select-all').click(function(event){
@@ -204,7 +217,6 @@ if(isset($_GET['delet'])){
         });
       }
     });
-
 
 </script>
 
