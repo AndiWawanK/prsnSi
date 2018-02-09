@@ -3,7 +3,7 @@
   class Library{
 
     public function __construct(){
-      $this->db = new PDO('mysql:host=localhost;dbname=absensiSiswa;','root','root');
+      $this->db = new PDO('mysql:host=localhost;dbname=absensiSiswa;','root','');
     }
 
     //menampilkan seluruh data dari database
