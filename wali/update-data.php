@@ -40,7 +40,7 @@ if(isset($_POST['save'])){
     $semester = htmlspecialchars($_POST['semester']);
 
     if(!empty(trim($nis)) && !empty(trim($nama)) && !empty(trim($kelas)) && !empty(trim($jurusan)) && !empty(trim($semester))){
-      $updateSiswa  = $objectSiswa->updateData($id_siswa,$nis,$nama,$kelas,$jurusan,$semester);
+      $updateSiswa  = $objectSiswa->updateDataSiswa($id_siswa,$nis,$nama,$kelas,$jurusan,$semester);
 
       if($updateSiswa == "True"){
         // echo "<script>location.reload();</script>";

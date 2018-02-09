@@ -25,7 +25,6 @@
    // }
 
 }
-
    //proses jika presensi telah selesai
    if(isset($_POST['absen'])){
      //cek apakah keterangan presensi selesai di input
@@ -41,6 +40,8 @@
 
         if(!empty($keterangan) && !empty($tanggal)){
          $ket  = $objectSiswa->keterangan($id_siswa,$keterangan,$tanggal);
+
+         var_dump($ket);
          if($ket == "Success"){
            $error = "Presensi Berhasil !";
          }else{
@@ -105,7 +106,7 @@
                   <select class="form-control" name="semester">
                     <option>Mata Pelajaran</option>
                     <?php while($mapel = $cek_mapel->fetch(PDO::FETCH_OBJ)){ ?>
-                        <option value=""><?php echo $mapel->nama_mapel; ?></option>
+                        <option value="<?php echo $mapel->nama_mapel; ?>"><?php echo $mapel->nama_mapel; ?></option>
                     <?php } ?>
                   </select>
                 </div> <!-- ./categori jurusan -->

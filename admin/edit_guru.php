@@ -1,5 +1,6 @@
 <?php
 require_once "../template/header.php";
+$ambil_kelas = $objectSiswa->ambil_kelas();
 $tampil_mapel = $objectSiswa->tampil_mapel();
   if(isset($_GET['id'])){
     $guru = $objectSiswa->edit_guru($_GET['id']);
@@ -47,7 +48,7 @@ $tampil_mapel = $objectSiswa->tampil_mapel();
           <select multiple="multiple" id="my-select" name="my-select[]">
             <option disabled>Pilih Mata Pelajaran</option>
             <?php while($tampil = $tampil_mapel->fetch(PDO::FETCH_OBJ)){ ?>
-            <option value='<?php echo $tampil->id_mapel; ?>'><?php echo $tampil->nama; ?></option>
+            <option value='<?php echo $tampil->id_mapel; ?>'><?php echo $tampil->nama_mapel; ?></option>
             <?php } ?>
           </select>
         </div>
@@ -61,17 +62,38 @@ $tampil_mapel = $objectSiswa->tampil_mapel();
             <option value="Y">Ya</option>
           </select>
         </div>
+
         <div class="form-group">
           <select class="form-control" id="kelas" name="kelas" disabled>
             <option>Pilih Kelas</option>
             <?php while($ambil_k = $ambil_kelas->fetch()){ ?>
-              <option value="<?php echo $ambil_k[0]; ?>"><?php echo $ambil_k[0]; ?></option>
+              <option value="<?php echo $ambil_k[0] ?>"><?php echo $ambil_k[0]; ?></option>
             <?php } ?>
           </select>
         </div>
+        <div class="form-group">
+          <label>Profile Guru</label>
+          <input type="file" id="file" name="foto" onchange="return fileValidation()">
+          <em>Ukuran Gambar Minimal 307 KB</em>
+        </div>
+        <div class="form-group">
+          <button type="submit" name="update" class="btn btn-info buton-presensi">Update</button>
+        </div>
       </form>
+    </div> <!--end-col-md-4-->
+    <div class="col-md-4 profile-guru text-center">
+      <img src="../assets/profile/<?php echo $row->foto_profile; ?>" alt="">
     </div>
   </div>
 </div>
-
+<script type="text/javascript">
+  function disable_kelas(){
+    var pilihan = $('#wali').val();
+    if (pilihan === 'Y') {
+      $('#kelas').prop('disabled',false);
+    } else {
+      $('#kelas').prop('disabled',true);
+    }
+  }
+</script>
 <?php require_once "../template/footer.php" ?>

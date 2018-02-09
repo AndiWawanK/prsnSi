@@ -13,6 +13,5 @@
   while ($temp = $data->fetch(PDO::FETCH_ASSOC)) {
     $respon[] = $temp;
   }
-
   echo json_encode($respon);
  ?>

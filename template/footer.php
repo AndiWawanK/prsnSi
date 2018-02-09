@@ -26,6 +26,7 @@ $(document).ready(function(){
     todayHighlight: true,
     autoclose: true,
   })
+
 })
 $(".dropdown-menu li a").click(function(){
 var selText = $(this).text();
@@ -75,6 +76,7 @@ function absen(kelas,jurusan,tanggal) {
     });
     console.log(tabelData);
     $('#bodyTabel').html(tabelData);
+    $('#downloadAbsen').html(tabelData);
   })
   console.log(kelas);
   console.log(jurusan);
