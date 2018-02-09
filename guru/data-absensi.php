@@ -110,7 +110,7 @@ if(isset($_GET['delet'])){
                        <td>$row->tanggal</td>
                        <td>
 
-                           <a href='download.php?download=$row->id_tanggal' onclick='absen(\"".$row->kelas."\",\"".$row->jurusan."\",\"".$row->tanggal."\")' class='btn btn-warning btn-xs'><i class='fa fa-cloud-download'></i> Download</a>
+                           <a href='download.php?kelas=$row->kelas&jurusan=$row->jurusan&tanggal=$row->tanggal' onclick='absen(\"".$row->kelas."\",\"".$row->jurusan."\",\"".$row->tanggal."\")' class='btn btn-warning btn-xs'><i class='fa fa-cloud-download'></i> Download</a>
 
                            <button data-toggle='modal' data-target='#myModal1' class='btn btn-info btn-xs' name='lihat' onclick='absen(\"".$row->kelas."\",\"".$row->jurusan."\",\"".$row->tanggal."\")'><i class='fa fa-eye'></i> View</button>
                            <a href='?delet=$row->id_tanggal' type='submit' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i> Delete</a>
