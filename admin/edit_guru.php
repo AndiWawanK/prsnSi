@@ -6,6 +6,10 @@ $tampil_mapel = $objectSiswa->tampil_mapel();
     $guru = $objectSiswa->edit_guru($_GET['id']);
     $row  = $guru->fetch(PDO::FETCH_OBJ);
   }
+
+  if(isset($_POST['update'])){
+    
+  }
 ?>
 
 <!-- Page Heading -->

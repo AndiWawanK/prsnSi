@@ -13,7 +13,7 @@
 
  $data = $core->absenByTanggal($kelas,$tanggal,$jurusan); ?>
 
- <table class='table table-bordered' id="employee_table">
+ <table border="1" id="employee_table">
    <thead>
      <tr>
        <th>NIS:</th>
