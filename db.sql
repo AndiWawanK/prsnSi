@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Feb 01, 2018 at 06:25 AM
+-- Generation Time: Feb 11, 2018 at 09:04 AM
 -- Server version: 5.6.35
 -- PHP Version: 7.1.8
 
@@ -41,9 +41,10 @@ INSERT INTO `guru` (`id_guru`, `nip`, `nama`, `tanggal_lahir`, `jenis_kelamin`, 
 (34, '17111066', 'A.Firwansyah', '11/13/1998', '', 'STAF', 'PNS', 'S1', 'IMG_0011.jpg'),
 (36, '17111066', 'Sukma Intang', '01/23/2018', '', 'KAPRO', 'PNS', 'S1', 'people.png'),
 (37, '17111077', 'Muthmainnah', '01/30/2018', '', '-', 'HONORER', 'S1', 'quote4.png'),
-(44, '12345', 'Irfan', '01/24/2018', '', 'GURU BK', 'HONORER', 'S1', 'IMG_0011.jpg'),
-(45, '1234', 'Sadariah', '01/31/2018', 'laki-laki', 'GURU BK', 'PNS', 'S1', 'quote3.png'),
-(47, '1234567', 'Indriani', '11/13/1998', 'perempuan', '-', 'PNS', 'S1', 'people.png');
+(50, '17111066', 'A.Firwansyah', '02/09/2018', 'laki-laki', '-', 'PNS', 'S1', 'IMG_0011.jpg'),
+(52, '17111068', 'Andi WawanK', '01/11/1998', 'Jenis Kelamin', '', '', '', ''),
+(53, '17111068', 'Andi WawanK', '01/11/1998', 'laki-laki', 'STAFF', 'PNS', 'S1', 'avatar.png'),
+(54, '', '', '', 'Jenis Kelamin', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -63,13 +64,9 @@ CREATE TABLE `jurusan` (
 --
 
 INSERT INTO `jurusan` (`id_tanggal`, `kelas`, `jurusan`, `tanggal`) VALUES
-(16, 'X', 'TAV', '01/25/2018'),
-(17, 'XI', 'TKR 1', '01/24/2018'),
-(18, 'X', 'Akutansi', '01/24/2018'),
-(19, 'XI', 'TKR 1', '01/29/2018'),
-(20, 'XI', 'TKR 1', '01/29/2018'),
-(21, 'XII', 'TKJ 1', '01/30/2018'),
-(22, 'XII', 'TKJ 2', '01/30/2018');
+(32, 'XII', 'TKJ 1', '02/11/2018'),
+(33, 'XI', 'TKR 1', '02/11/2018'),
+(34, 'X', 'TAV', '02/12/2018');
 
 -- --------------------------------------------------------
 
@@ -88,22 +85,18 @@ CREATE TABLE `keterangan` (
 --
 
 INSERT INTO `keterangan` (`id_siswa`, `keterangan`, `tanggal`) VALUES
-(1, 'hadir', '01/30/2018'),
-(2, 'izin', '01/30/2018'),
-(3, 'hadir', '01/30/2018'),
-(4, 'hadir', '01/30/2018'),
-(7, 'hadir', '01/30/2018'),
-(12, 'hadir', '01/29/2018'),
-(18, 'alpha', '01/30/2018'),
-(19, 'hadir', '01/30/2018'),
-(20, 'hadir', '01/30/2018'),
-(21, 'hadir', '01/30/2018'),
-(22, 'hadir', '01/30/2018'),
-(23, 'hadir', '01/30/2018'),
-(24, 'hadir', '01/30/2018'),
-(25, 'hadir', '01/29/2018'),
-(26, 'hadir', '01/29/2018'),
-(27, 'hadir', '01/29/2018');
+(2, 'izin', '02/11/2018'),
+(5, 'hadir', '02/12/2018'),
+(11, 'hadir', '02/12/2018'),
+(12, 'hadir', '02/11/2018'),
+(17, 'izin', '02/12/2018'),
+(19, 'izin', '02/11/2018'),
+(20, 'izin', '02/11/2018'),
+(21, 'alpha', '02/11/2018'),
+(22, 'izin', '02/11/2018'),
+(23, 'hadir', '02/11/2018'),
+(26, 'hadir', '02/11/2018'),
+(28, 'izin', '02/12/2018');
 
 -- --------------------------------------------------------
 
@@ -121,10 +114,16 @@ CREATE TABLE `mapel` (
 --
 
 INSERT INTO `mapel` (`id_mapel`, `nama_mapel`) VALUES
-(22, 'Matematika'),
-(23, 'Bahasa Inggris'),
-(24, 'Fisika'),
-(25, 'Pendidikan Agama');
+(27, 'Bahasa Inggris'),
+(28, 'Matematika'),
+(29, 'Fisika'),
+(30, 'TrobleShooting'),
+(31, 'Mesin Mobil'),
+(32, 'Dasdmskda'),
+(33, 'Dasjndkjasn'),
+(34, 'asdasda'),
+(35, 'dasasdasd'),
+(36, 'asdasda');
 
 -- --------------------------------------------------------
 
@@ -171,7 +170,17 @@ INSERT INTO `mapel_guru` (`id_guru`, `id_mapel`) VALUES
 (46, 24),
 (46, 25),
 (47, 24),
-(47, 25);
+(47, 25),
+(48, 23),
+(48, 24),
+(49, 23),
+(49, 24),
+(50, 27),
+(50, 28),
+(51, 27),
+(51, 29),
+(53, 27),
+(53, 29);
 
 -- --------------------------------------------------------
 
@@ -183,6 +192,9 @@ CREATE TABLE `siswa` (
   `id_siswa` int(11) NOT NULL,
   `nis` int(20) NOT NULL,
   `nama` varchar(40) NOT NULL,
+  `jenis_kelamin` varchar(20) NOT NULL,
+  `alamat` varchar(50) NOT NULL,
+  `tanggal_lahir` varchar(30) NOT NULL,
   `kelas` varchar(10) NOT NULL,
   `jurusan` varchar(30) NOT NULL,
   `semester` varchar(50) NOT NULL
@@ -192,33 +204,25 @@ CREATE TABLE `siswa` (
 -- Dumping data for table `siswa`
 --
 
-INSERT INTO `siswa` (`id_siswa`, `nis`, `nama`, `kelas`, `jurusan`, `semester`) VALUES
-(1, 17111066, 'A.Firwansyah', 'XII', 'TKJ 1', 'semester 1'),
-(2, 17111067, 'Indriani', 'XII', 'TKJ 1', ''),
-(3, 18111068, 'Dono', 'XII', 'TKJ 2', ''),
-(4, 12111012, 'Poncot', 'XII', 'TKJ 2', ''),
-(5, 1237122, 'Bego', 'X', 'TAV', ''),
-(6, 2112431, 'Susano', 'XI', 'NKPI', ''),
-(7, 12372371, 'Ahmad', 'XII', 'TKJ 2', 'semester 1'),
-(11, 12321421, 'Santoso', 'X', 'TAV', 'semester 1'),
-(12, 17111008, 'Pranto Suwarno', 'XI', 'TKR 1', 'semester 1'),
-(13, 17121016, 'Heri Agus Prasetio', 'X', 'AP 1', 'semester 1'),
-(14, 1823910, 'Agus', 'X', 'AP 1', 'semester 1'),
-(15, 1232312, 'Prasetyo', 'X', 'Tata Niaga', 'semester 3'),
-(16, 2424241, 'Human', 'X', 'Tata Busana', 'semester 3'),
-(17, 1231232, 'Dono', 'X', 'TAV', 'semester 1'),
-(18, 123213, 'Sama', 'XII', 'TKJ 1', 'semester 1'),
-(19, 123232131, 'Susanoq', 'XII', 'TKJ 1', 'semester 1'),
-(20, 3423423, 'Balala', 'XII', 'TKJ 1', 'semester 1'),
-(21, 342141, 'balaass', 'XII', 'TKJ 1', 'semester 1'),
-(22, 31231231, 'Jugo', 'XII', 'TKJ 1', 'semester 1'),
-(23, 12321312, 'Sasuke', 'XII', 'TKJ 1', 'semester 1'),
-(24, 123213123, 'Sakura', 'XII', 'TKJ 1', 'semester 1'),
-(25, 1232312, 'Naruto', 'XI', 'TKR 1', 'semester 1'),
-(26, 12321312, 'Kakashi', 'XI', 'TKR 1', 'semester 1'),
-(27, 12323213, 'Jiraya', 'XI', 'TKR 1', 'semester 1'),
-(28, 232312312, 'Nagato', 'X', 'TAV', 'semester 1'),
-(29, 123214124, 'Supriadi', 'XII', 'Akutansi', 'semester 1');
+INSERT INTO `siswa` (`id_siswa`, `nis`, `nama`, `jenis_kelamin`, `alamat`, `tanggal_lahir`, `kelas`, `jurusan`, `semester`) VALUES
+(1, 17111066, 'A.Firwansyah', 'Laki-Laki', 'Jl.Jembatan Merah', '13/11/1998', 'XI', 'TKJ 1', 'Semester:'),
+(2, 17111067, 'Indriani', 'Perempuan', 'Tidak Diketahui', 'Tidak diKetahui', 'XII', 'TKJ 1', 'Semester:'),
+(3, 18111068, 'Dono', 'Laki-Laki', 'Bonto Macinna', '12/11/1998', 'XII', 'TKJ 2', ''),
+(5, 1237122, 'Bego', 'Perempuan', 'Sawere', '12/11/1998', 'X', 'TAV', ''),
+(6, 2112431, 'Susano', '', '', '', 'XI', 'NKPI', ''),
+(7, 12372371, 'Ahmad', 'Laki-Laki', 'Jl.Jalan Jalan', '02/16/2018', 'XI', 'TKJ 2', 'semester 1'),
+(12, 17111008, 'Pranto Suwarno', '', '', '', 'XI', 'TKR 1', 'semester 1'),
+(13, 17121016, 'Heri Agus Prasetio', '', '', '', 'X', 'AP 1', 'semester 1'),
+(15, 1232312, 'Prasetyo', '', '', '', 'X', 'Tata Niaga', 'semester 3'),
+(16, 2424241, 'Human', '', '', '', 'X', 'Tata Busana', 'semester 3'),
+(19, 123232131, 'Susanoq', 'Laki-Laki', 'Jl.Teratai', '13/11/1998', 'XII', 'TKJ 1', 'semester 1'),
+(20, 3423423, 'Balala', 'Laki-Laki', '', '', 'XII', 'TKJ 1', 'Semester:'),
+(21, 342141, 'balaass', '', '', '', 'XII', 'TKJ 1', 'semester 1'),
+(22, 31231231, 'Jugo', '', '', '', 'XII', 'TKJ 1', 'semester 1'),
+(23, 12321312, 'Sasuke', '', '', '', 'XII', 'TKJ 1', 'semester 1'),
+(26, 12321312, 'Kakashi', '', '', '', 'XI', 'TKR 1', 'semester 1'),
+(29, 123214124, 'Supriadi', '', '', '', 'XII', 'Akutansi', 'semester 1'),
+(30, 1234567, 'Semabrang', 'Laki-Laki', 'Jl.Semabrang', '01/11/1998', 'XI', 'TKR 2', 'semester 1');
 
 -- --------------------------------------------------------
 
@@ -246,7 +250,14 @@ INSERT INTO `users` (`id_user`, `nama_lengkap`, `username`, `password`, `level`,
 (4, 'administrator', 'admin', 'admin', 'admin', '', ''),
 (20, 'Irfan', '12345', '01242018', 'guru', 'T', 'IMG_0011.jpg'),
 (21, 'Sadariah', '1234', '01312018', 'guru', 'T', 'quote5.png'),
-(23, 'Indriani', '1234567', '11131998', 'guru', 'T', 'frank-mckenna-140054.jpg');
+(23, 'Indriani', '1234567', '11131998', 'guru', 'T', 'frank-mckenna-140054.jpg'),
+(24, 'Kopi', '123456', '02022018', 'guru', 'Y', 'quote2.png'),
+(25, 'A.Firwansyah', '123213412', '123', 'guru', 'Y', 'IMG_0011.jpg'),
+(26, 'A.Firwansyah', '17111066', '02092018', 'guru', 'Y', 'IMG_0011.jpg'),
+(27, 'Andi WawanK', '17111068', '01111998', 'guru', 'Y', 'avatar.png'),
+(28, 'Andi WawanK', '17111068', '01111998', 'guru', 'T', ''),
+(29, 'Andi WawanK', '17111068', 'wawank1234', 'guru', 'T', 'avatar.png'),
+(30, '', '', '', 'guru', 'T', '');
 
 -- --------------------------------------------------------
 
@@ -269,7 +280,11 @@ INSERT INTO `wali` (`username`, `kelas`) VALUES
 (17111066, 'TKJ 1'),
 (17111066, 'TKJ 2'),
 (17111066, 'TKJ 2'),
-(123456789, 'TKJ 1');
+(123456789, 'TKJ 1'),
+(123456, 'TKJ 2'),
+(123213412, 'TKJ 1'),
+(17111066, 'TKJ 1'),
+(17111068, 'TKJ 2');
 
 --
 -- Indexes for dumped tables
@@ -319,24 +334,24 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `guru`
 --
 ALTER TABLE `guru`
-  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 --
 -- AUTO_INCREMENT for table `jurusan`
 --
 ALTER TABLE `jurusan`
-  MODIFY `id_tanggal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_tanggal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `mapel`
 --
 ALTER TABLE `mapel`
-  MODIFY `id_mapel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_mapel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
