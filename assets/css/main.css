@@ -11,6 +11,12 @@
 .pagination-siswa{
   margin-top: -18px;
 }
+.cari-mapel input{
+  width: 168px;
+  border-radius: 3px;
+  border: 1px solid #bbb;
+  text-indent: 5px;
+}
 .page-wrapper{
   min-height: 700px;
 }
@@ -128,6 +134,7 @@
 .tanggal-presen{
   margin-left: 5px;
 }
+
 #wrapper{
   background-color: #222d32;
 }

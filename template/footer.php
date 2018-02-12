@@ -6,16 +6,17 @@
 
 <script src="../assets/js/bootstrap.min.js"></script>
 <script src="../assets/js/bootstrap-select.min.js"></script>
-<script src="../assets/js/plugins/morris/raphael.min.js"></script>
+<!-- <script src="../assets/js/plugins/morris/raphael.min.js"></script>
 <script src="../assets/js/plugins/morris/morris.min.js"></script>
-<script src="../assets/js/plugins/morris/morris-data.js"></script>
+<script src="../assets/js/plugins/morris/morris-data.js"></script> -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-show-password/1.0.3/bootstrap-show-password.min.js"></script>
 <script type="text/javascript" src="https://formden.com/static/cdn/formden.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css">
-<script src="../assets/js/multi-select.js"></script>
+<script src="../assets/js/jquery.multi-select.js"></script>
+<!-- <script src="../assets/js/multi-select.js"></script> -->
 <script>
 $(document).ready(function(){
   var date_input=$('input[name="date"]'); //our date input has the name "date"
@@ -26,6 +27,8 @@ $(document).ready(function(){
     todayHighlight: true,
     autoclose: true,
   })
+
+
 
 })
 $(".dropdown-menu li a").click(function(){
@@ -53,6 +56,8 @@ alert($('.btn-select').text()+", "+$('.btn-select2').text());
 // });
 $("#password").password('toggle');
 $('#my-select').multiSelect();
+$('#mapel-select').multiSelect();
+
 function fileValidation(){
     var fileInput = document.getElementById('file');
     var filePath = fileInput.value;

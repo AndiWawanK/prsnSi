@@ -1,5 +1,6 @@
 <?php
 require_once "../template/header.php";
+
 if($_SESSION['status'] !== 'admin'){
   header('location: ../index.php');
 }
@@ -63,6 +64,8 @@ $tampil_mapel = $objectSiswa->tampil_mapel();
 
   }
 
+
+
 ?>
 
 <!-- Page Heading -->
@@ -118,18 +121,41 @@ $tampil_mapel = $objectSiswa->tampil_mapel();
             </select>
           </div>
           <div class="form-group">
-            <input type="text" name="pangkat" class="form-control" placeholder="Pangkat">
-          </div>
-          <div class="form-group">
-            <input type="text" name="status" class="form-control" placeholder="Status">
-          </div>
-          <div class="form-group">
-            <select multiple="multiple" id="my-select" name="my-select[]">
-              <option disabled>Pilih Mata Pelajaran</option>
-              <?php while($tampil = $tampil_mapel->fetch(PDO::FETCH_OBJ)){ ?>
-              <option value='<?php echo $tampil->id_mapel; ?>'><?php echo $tampil->nama_mapel; ?></option>
-              <?php } ?>
+            <!-- <input type="text" name="pangkat" class="form-control" placeholder="Pangkat"> -->
+            <select class="form-control" name="pangkat">
+              <option>--Pangkat--</option>
+              <option value="-">-</option>
+              <option value="GURU BK">GURU BK</option>
+              <option value="STAFF">STAFF</option>
             </select>
+          </div>
+          <div class="form-group">
+            <!-- <input type="text" name="status" class="form-control" placeholder="Status"> -->
+            <select class="form-control" name="status">
+              <option>--Status--</option>
+              <option value="PNS">PNS</option>
+              <option value="HONOR">HONOR</option>
+            </select>
+          </div>
+          <!-- <div class="input-group">
+            <input type="text" class="form-control" name="keyword" autocomplete="off" spellcheck="false" placeholder="Cari Mata Pelajaran">
+            <span class="input-group-btn">
+              <button class="btn btn-info" name="cari" type="submit">Go!</button>
+            </span>
+          </div><br> -->
+          <div class="form-group cari-mapel">
+            <input type="text" name="cari_mapel" id="keyword" placeholder="Cari Mata Pelajaran" autocomplete="off" spellcheck="false">
+            <div id="container-mapel">
+              <select multiple="multiple" id="my-select" name="my-select[]">
+                <option disabled>Pilih Mata Pelajaran</option>
+                <?php while($tampil = $tampil_mapel->fetch(PDO::FETCH_OBJ)){ ?>
+                <option value='<?php echo $tampil->id_mapel; ?>'><?php echo $tampil->nama_mapel; ?></option>
+                <?php } ?>
+              </select>
+            </div>
+            <div id="coba">
+              
+            </div>
           </div>
           <div class="form-group">
             <input type="text" name="pendidikan" class="form-control" placeholder="Pendidikan">
@@ -167,7 +193,10 @@ $tampil_mapel = $objectSiswa->tampil_mapel();
     </div>
   </div>
 </div>
+<script src="../assets/js/cari.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+
   function disable_kelas(){
     var pilihan = $('#wali').val();
     if (pilihan === 'Y') {
@@ -176,5 +205,8 @@ $tampil_mapel = $objectSiswa->tampil_mapel();
       $('#kelas').prop('disabled',true);
     }
   }
+
+  });
+
 </script>
 <?php require_once "../template/footer.php" ?>

@@ -127,22 +127,7 @@
       $query = $this->db->query($sql);
       return $query;
     }
-    // public function detailAbsen($jurusan,$id_siswa){
-    //   $sql   = "SELECT siswa.nis , siswa.nama , siswa.kelas , siswa.jurusan , keterangan.keterangan
-    //             FROM siswa INNER JOIN keterangan ON siswa.id_siswa = keterangan.id_siswa";
-    //   $query = $this->db->query($sql);
-    //   return $query;
-    // }
 
-    // public function detailAbsen(){
-    //   $sql    = "SELECT siswa.nis , siswa.nama , siswa.kelas , jurusan.jurusan , keterangan.tanggal , keterangan.keterangan
-    //   FROM siswa
-    //   INNER JOIN jurusan
-    //   INNER JOIN keterangan ON siswa.id_siswa = keterangan.id_siswa
-    //   WHERE siswa.kelas = 'XII' AND jurusan.jurusan = 'TKJ 1'";
-    //   $query = $this->db->query($sql);
-    //   return $query;
-    // }
 
     //login
     public function login($username,$password){
@@ -277,6 +262,14 @@
       $query = $this->db->query($sql);
       return $query;
     }
+
+    //cari mata pelajaran
+    public function cari_mapel($keyword){
+      $sql    = "SELECT * FROM mapel WHERE nama_mapel LIKE '%{$keyword}%' ";
+      $query  = $this->db->query($sql);
+      return $query;
+    }
+
     //delete mapel
     public function delete_mapel($id_mapel){
       $sql   = "DELETE FROM mapel WHERE id_mapel='$id_mapel'";
