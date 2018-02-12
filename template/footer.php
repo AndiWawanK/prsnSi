@@ -57,7 +57,10 @@ alert($('.btn-select').text()+", "+$('.btn-select2').text());
 $("#password").password('toggle');
 $('#my-select').multiSelect();
 $('#mapel-select').multiSelect();
-
+$('#custom-headers').multiSelect({
+  selectableHeader: "<div class='custom-header text-center' style='background-color:#bbb;color:white;'>Pilih Mata Pelajaran</div>",
+  selectionHeader: "<div class='custom-header text-center' style='background-color:#bbb;color:white;'>Mata Pelajaran Terpilih</div>",
+});
 function fileValidation(){
     var fileInput = document.getElementById('file');
     var filePath = fileInput.value;

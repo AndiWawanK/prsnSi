@@ -1,7 +1,7 @@
 //ambil elemen2 yang dibutuhkan
 var keyword = document.getElementById('keyword');
 var containerMapel = document.getElementById('container-mapel');
-var mySelect = document.getElementById('coba');
+var mySelect = document.getElementById('my-select');
 
 //tambahkan event ketika keyword ditulis
 keyword.addEventListener('keyup', function(){
@@ -14,6 +14,7 @@ keyword.addEventListener('keyup', function(){
 
     if(xhr.readyState == 4 && xhr.status == 200){
       containerMapel.innerHTML = xhr.responseText;
+      console.log(containerMapel);
     }
 
   }

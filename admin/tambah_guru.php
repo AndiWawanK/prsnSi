@@ -64,14 +64,12 @@ $tampil_mapel = $objectSiswa->tampil_mapel();
 
   }
 
-
-
 ?>
 
 <!-- Page Heading -->
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header"></h1>
+        <h1 class="page-header">Tambah Guru</h1>
         <ol class="breadcrumb">
             <li><a href="index.php">Dashboard</a></li>
             <li><a href="data-guru.php">Data Guru</a></li>
@@ -145,16 +143,16 @@ $tampil_mapel = $objectSiswa->tampil_mapel();
           </div><br> -->
           <div class="form-group cari-mapel">
             <input type="text" name="cari_mapel" id="keyword" placeholder="Cari Mata Pelajaran" autocomplete="off" spellcheck="false">
+
             <div id="container-mapel">
-              <select multiple="multiple" id="my-select" name="my-select[]">
-                <option disabled>Pilih Mata Pelajaran</option>
+              <select multiple="multiple" id="custom-headers" name="my-select[]">
                 <?php while($tampil = $tampil_mapel->fetch(PDO::FETCH_OBJ)){ ?>
                 <option value='<?php echo $tampil->id_mapel; ?>'><?php echo $tampil->nama_mapel; ?></option>
                 <?php } ?>
               </select>
             </div>
             <div id="coba">
-              
+
             </div>
           </div>
           <div class="form-group">
